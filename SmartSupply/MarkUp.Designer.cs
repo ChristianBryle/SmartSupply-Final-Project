@@ -51,6 +51,7 @@
             // 
             // panel3
             // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.label7);
             this.panel3.Location = new System.Drawing.Point(334, 254);
@@ -81,6 +82,7 @@
             // 
             // panel2
             // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Location = new System.Drawing.Point(31, 254);

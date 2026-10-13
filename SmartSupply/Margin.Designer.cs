@@ -1,6 +1,6 @@
 ﻿namespace SmartSupply
 {
-    partial class Margin
+    partial class SmartMargin
     {
         /// <summary>
         /// Required designer variable.
@@ -51,6 +51,7 @@
             // 
             // panel3
             // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.label7);
             this.panel3.Location = new System.Drawing.Point(334, 254);
@@ -81,6 +82,7 @@
             // 
             // panel2
             // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Location = new System.Drawing.Point(31, 254);
@@ -205,7 +207,7 @@
             this.numericUpDown1.Size = new System.Drawing.Size(536, 34);
             this.numericUpDown1.TabIndex = 28;
             // 
-            // Margin
+            // SmartMargin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -223,7 +225,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Margin";
+            this.Name = "SmartMargin";
             this.Text = "SmartMargin";
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
