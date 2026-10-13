@@ -46,11 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddProduct.Designer.cs">
+      <DependentUpon>AddProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditProduct.Designer.cs">
+      <DependentUpon>EditProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="MarkUp.cs">
       <SubType>Form</SubType>
@@ -66,8 +84,29 @@
     <Compile Include="Margin.Designer.cs">
       <DependentUpon>Margin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Stockin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stockin.Designer.cs">
+      <DependentUpon>Stockin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockOut.Designer.cs">
+      <DependentUpon>StockOut.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AddProduct.resx">
+      <DependentUpon>AddProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditProduct.resx">
+      <DependentUpon>EditProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MarkUp.resx">
       <DependentUpon>MarkUp.cs</DependentUpon>
@@ -83,6 +122,12 @@
     </Compile>
     <EmbeddedResource Include="Margin.resx">
       <DependentUpon>Margin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stockin.resx">
+      <DependentUpon>Stockin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockOut.resx">
+      <DependentUpon>StockOut.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
