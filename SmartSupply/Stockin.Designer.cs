@@ -71,9 +71,9 @@
             this.label11.ForeColor = System.Drawing.Color.Black;
             this.label11.Location = new System.Drawing.Point(19, 175);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(60, 28);
+            this.label11.Size = new System.Drawing.Size(85, 28);
             this.label11.TabIndex = 37;
-            this.label11.Text = "Stock";
+            this.label11.Text = "Remarks";
             // 
             // label3
             // 
@@ -82,9 +82,9 @@
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(19, 106);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 28);
+            this.label3.Size = new System.Drawing.Size(88, 28);
             this.label3.TabIndex = 36;
-            this.label3.Text = "Category";
+            this.label3.Text = "Quantity";
             // 
             // label49
             // 
@@ -93,9 +93,9 @@
             this.label49.ForeColor = System.Drawing.Color.Black;
             this.label49.Location = new System.Drawing.Point(19, 37);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(138, 28);
+            this.label49.Size = new System.Drawing.Size(81, 28);
             this.label49.TabIndex = 35;
-            this.label49.Text = "Product Name";
+            this.label49.Text = "Product";
             // 
             // btnSaveProduct
             // 
