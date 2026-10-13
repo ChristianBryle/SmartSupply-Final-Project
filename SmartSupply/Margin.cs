@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SmartSupply
 {
-    public partial class Margin : Form
+    public partial class SmartMargin : Form
     {
-        public Margin()
+        public SmartMargin()
         {
             InitializeComponent();
         }

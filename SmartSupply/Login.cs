@@ -31,5 +31,11 @@ namespace SmartSupply
         {
 
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            frmMain Main = new frmMain();
+            Main.Show();
+        }
     }
 }
