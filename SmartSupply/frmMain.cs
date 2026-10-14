@@ -45,6 +45,7 @@ namespace SmartSupply
             {
                 LoadProducts();
                 LoadCategories();
+                LoadMovements();
             }
             catch (SqlException ex)
             {
@@ -75,6 +76,15 @@ namespace SmartSupply
                 "SELECT c.category_id AS [ID], c.category_name AS [Category], " +
                 "(SELECT COUNT(*) FROM products p WHERE p.category_id = c.category_id) AS [Products] " +
                 "FROM categories c ORDER BY c.category_name");
+        }
+
+        private void LoadMovements()
+        {
+            dataGridView1.DataSource = Database.Query(
+                "SELECT t.transaction_id AS [ID], t.transaction_date AS [Date], p.product_name AS [Product], " +
+                "t.transaction_type AS [Type], t.quantity AS [Quantity], t.remarks AS [Remarks] " +
+                "FROM Transactions_log t JOIN products p ON p.product_id = t.product_id " +
+                "ORDER BY t.transaction_date DESC, t.transaction_id DESC");
         }
 
         private void btnSearchProduct_Click(object sender, EventArgs e)
@@ -193,7 +203,8 @@ namespace SmartSupply
         private void button1_Click(object sender, EventArgs e)
         {
             Stockin stockin = new Stockin();
-            stockin.Show();
+            if (stockin.ShowDialog(this) == DialogResult.OK)
+                RefreshAll();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -218,8 +229,9 @@ namespace SmartSupply
 
         private void btnStockOut_Click(object sender, EventArgs e)
         {
-            StockOut stockin = new StockOut();
-            stockin.Show();
+            StockOut stockOut = new StockOut();
+            if (stockOut.ShowDialog(this) == DialogResult.OK)
+                RefreshAll();
         }
 
         private void btnMarkUp_Click(object sender, EventArgs e)
