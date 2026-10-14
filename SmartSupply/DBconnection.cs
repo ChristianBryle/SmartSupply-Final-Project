@@ -10,7 +10,7 @@ namespace SmartSupply
     public class DBconnection
     {
         private const string ConnectionString =
-        @"Server=.\SQLEXPRESS;Database=SmartSupplyDB_New;Trusted_Connection=True;TrustServerCertificate=True;";
+        @"Server=.\SQLEXPRESS;Database=SmartSupplyDB;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public static SqlConnection Open()
         {
