@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,7 +30,7 @@ namespace SmartSupply
 
         private void LoadProduct()
         {
-            DataTable table = Database.Query(
+            DataTable table = DBconnection.Query(
                 "SELECT product_name, category_id, quantity, reorder_level, unit_price FROM products WHERE product_id = @id",
                 new SqlParameter("@id", productId));
             if (table.Rows.Count == 0)
@@ -52,7 +52,7 @@ namespace SmartSupply
 
             try
             {
-                Database.Execute(
+                DBconnection.Execute(
                     "UPDATE products SET product_name = @name, category_id = @category, quantity = @quantity, " +
                     "reorder_level = @reorder, unit_price = @price WHERE product_id = @id",
                     new SqlParameter("@name", textBox1.Text.Trim()),

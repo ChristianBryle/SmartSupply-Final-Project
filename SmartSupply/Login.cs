@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -48,10 +48,10 @@ namespace SmartSupply
 
             try
             {
-                object count = Database.Scalar(
+                object count = DBconnection.Scalar(
                     "SELECT COUNT(*) FROM users WHERE username = @username AND password_hash = @hash",
                     new SqlParameter("@username", username),
-                    new SqlParameter("@hash", Database.HashPassword(password)));
+                    new SqlParameter("@hash", DBconnection.HashPassword(password)));
 
                 if (Convert.ToInt32(count) == 0)
                 {

@@ -11,7 +11,7 @@ namespace SmartSupply
             product.DropDownStyle = ComboBoxStyle.DropDownList;
             product.DisplayMember = "label";
             product.ValueMember = "product_id";
-            product.DataSource = Database.Query(
+            product.DataSource = DBconnection.Query(
                 "SELECT product_id, product_name + ' (Stock: ' + CAST(quantity AS VARCHAR(20)) + ')' AS label " +
                 "FROM products ORDER BY product_name");
             quantity.Minimum = 1;
@@ -22,7 +22,7 @@ namespace SmartSupply
         {
             int delta = type == "Stock In" ? quantity : -quantity;
 
-            using (var conn = Database.GetConnection())
+            using (var conn = DBconnection.GetConnection())
             {
                 conn.Open();
                 using (var tx = conn.BeginTransaction())

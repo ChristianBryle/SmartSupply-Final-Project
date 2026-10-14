@@ -78,7 +78,6 @@
     <Compile Include="MarkUp.Designer.cs">
       <DependentUpon>MarkUp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database.cs" />
     <Compile Include="ProductFields.cs" />
     <Compile Include="StockMovement.cs" />
     <Compile Include="Program.cs" />
@@ -134,6 +133,7 @@
     <EmbeddedResource Include="StockOut.resx">
       <DependentUpon>StockOut.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DBconnection.cs.new" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

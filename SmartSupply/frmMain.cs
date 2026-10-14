@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -62,7 +62,7 @@ namespace SmartSupply
 
         private void LoadProducts()
         {
-            dataGridView3.DataSource = Database.Query(
+            dataGridView3.DataSource = DBconnection.Query(
                 "SELECT p.product_id AS [ID], p.product_name AS [Product], c.category_name AS [Category], " +
                 "p.quantity AS [Stock], p.reorder_level AS [Reorder Level], p.unit_price AS [Price] " +
                 "FROM products p LEFT JOIN categories c ON c.category_id = p.category_id " +
@@ -72,7 +72,7 @@ namespace SmartSupply
 
         private void LoadCategories()
         {
-            dataGridView2.DataSource = Database.Query(
+            dataGridView2.DataSource = DBconnection.Query(
                 "SELECT c.category_id AS [ID], c.category_name AS [Category], " +
                 "(SELECT COUNT(*) FROM products p WHERE p.category_id = c.category_id) AS [Products] " +
                 "FROM categories c ORDER BY c.category_name");
@@ -80,7 +80,7 @@ namespace SmartSupply
 
         private void LoadMovements()
         {
-            dataGridView1.DataSource = Database.Query(
+            dataGridView1.DataSource = DBconnection.Query(
                 "SELECT t.transaction_id AS [ID], t.transaction_date AS [Date], p.product_name AS [Product], " +
                 "t.transaction_type AS [Type], t.quantity AS [Quantity], t.remarks AS [Remarks] " +
                 "FROM Transactions_log t JOIN products p ON p.product_id = t.product_id " +
@@ -103,7 +103,7 @@ namespace SmartSupply
             if (MessageBox.Show("Delete the selected product and its transaction history?", "Products", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
-            Database.Execute(
+            DBconnection.Execute(
                 "DELETE FROM Transactions_log WHERE product_id = @id; DELETE FROM products WHERE product_id = @id;",
                 new SqlParameter("@id", id.Value));
             RefreshAll();
@@ -118,14 +118,14 @@ namespace SmartSupply
                 return;
             }
 
-            object exists = Database.Scalar("SELECT COUNT(*) FROM categories WHERE category_name = @name", new SqlParameter("@name", name));
+            object exists = DBconnection.Scalar("SELECT COUNT(*) FROM categories WHERE category_name = @name", new SqlParameter("@name", name));
             if (Convert.ToInt32(exists) > 0)
             {
                 MessageBox.Show("Category already exists.", "Categories", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            Database.Execute("INSERT INTO categories (category_name) VALUES (@name)", new SqlParameter("@name", name));
+            DBconnection.Execute("INSERT INTO categories (category_name) VALUES (@name)", new SqlParameter("@name", name));
             textBox1.Clear();
             RefreshAll();
         }
@@ -141,7 +141,7 @@ namespace SmartSupply
             if (MessageBox.Show("Delete the selected category? Products in it will become uncategorized.", "Categories", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
-            Database.Execute(
+            DBconnection.Execute(
                 "UPDATE products SET category_id = NULL WHERE category_id = @id; DELETE FROM categories WHERE category_id = @id;",
                 new SqlParameter("@id", id.Value));
             RefreshAll();

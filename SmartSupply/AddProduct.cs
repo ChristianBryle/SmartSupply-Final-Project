@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,7 +28,7 @@ namespace SmartSupply
 
             try
             {
-                Database.Execute(
+                DBconnection.Execute(
                     "INSERT INTO products (product_name, category_id, quantity, reorder_level, unit_price) " +
                     "VALUES (@name, @category, @quantity, @reorder, @price)",
                     new SqlParameter("@name", textBox1.Text.Trim()),

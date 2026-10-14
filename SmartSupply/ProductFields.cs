@@ -9,7 +9,7 @@ namespace SmartSupply
             category.DropDownStyle = ComboBoxStyle.DropDownList;
             category.DisplayMember = "category_name";
             category.ValueMember = "category_id";
-            category.DataSource = Database.Query("SELECT category_id, category_name FROM categories ORDER BY category_name");
+            category.DataSource = DBconnection.Query("SELECT category_id, category_name FROM categories ORDER BY category_name");
 
             stock.Maximum = 1000000;
             reorder.Maximum = 1000000;
