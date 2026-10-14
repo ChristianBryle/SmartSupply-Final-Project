@@ -46,6 +46,7 @@ namespace SmartSupply
                 LoadProducts();
                 LoadCategories();
                 LoadMovements();
+                LoadDashboard();
             }
             catch (SqlException ex)
             {
@@ -85,6 +86,18 @@ namespace SmartSupply
                 "t.transaction_type AS [Type], t.quantity AS [Quantity], t.remarks AS [Remarks] " +
                 "FROM Transactions_log t JOIN products p ON p.product_id = t.product_id " +
                 "ORDER BY t.transaction_date DESC, t.transaction_id DESC");
+        }
+
+        private void LoadDashboard()
+        {
+            label47.Text = Convert.ToInt32(DBconnection.Scalar("SELECT COUNT(*) FROM products")).ToString();
+            label50.Text = Convert.ToInt32(DBconnection.Scalar("SELECT COUNT(*) FROM products WHERE quantity <= reorder_level")).ToString();
+
+            dataGridView6.DataSource = DBconnection.Query(
+                "SELECT p.product_name AS [Product], c.category_name AS [Category], " +
+                "p.quantity AS [Stock], p.reorder_level AS [Reorder Level] " +
+                "FROM products p LEFT JOIN categories c ON c.category_id = p.category_id " +
+                "WHERE p.quantity <= p.reorder_level ORDER BY p.quantity, p.product_name");
         }
 
         private void btnSearchProduct_Click(object sender, EventArgs e)
@@ -151,6 +164,14 @@ namespace SmartSupply
         {
             pnlDashboard.Show();
             pnlDashboard.BringToFront();
+            try
+            {
+                LoadDashboard();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Database error.\n" + ex.Message, "SmartSupply", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnProduct_Click(object sender, EventArgs e)
@@ -238,6 +259,11 @@ namespace SmartSupply
         {
             MarkUp markUp = new MarkUp();
             markUp.Show();
+        }
+
+        private void label55_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
