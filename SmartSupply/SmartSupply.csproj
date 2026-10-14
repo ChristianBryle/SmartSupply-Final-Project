@@ -53,6 +53,7 @@
     <Compile Include="AddProduct.Designer.cs">
       <DependentUpon>AddProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="DBconnection.cs" />
     <Compile Include="EditProduct.cs">
       <SubType>Form</SubType>
     </Compile>
