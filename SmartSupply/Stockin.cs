@@ -15,6 +15,8 @@ namespace SmartSupply
         public Stockin()
         {
             InitializeComponent();
+            StockMovement.Setup(comboBox1, numericUpDown1);
+            btnSaveProduct.Click += (s, e) => StockMovement.Save(this, comboBox1, numericUpDown1, textBox1, "Stock In");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
