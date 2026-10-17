@@ -10,14 +10,16 @@ using System.Windows.Forms;
 
 namespace SmartSupply
 {
-    public partial class Form1 : Form
+    public partial class Stockin : Form
     {
-        public Form1()
+        public Stockin()
         {
             InitializeComponent();
+            StockMovement.Setup(comboBox1, numericUpDown1);
+            btnSaveProduct.Click += (s, e) => StockMovement.Save(this, comboBox1, numericUpDown1, textBox1, "Stock In");
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
