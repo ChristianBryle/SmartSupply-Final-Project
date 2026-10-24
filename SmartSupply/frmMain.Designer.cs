@@ -1834,13 +1834,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 653);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.pnlPOSTerminal);
             this.Controls.Add(this.pnlProducts);
             this.Controls.Add(this.pnlCategories);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnlInventoryMovements);
             this.Controls.Add(this.pnlPriceCalculator);
+            this.Controls.Add(this.pnlDashboard);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMain";

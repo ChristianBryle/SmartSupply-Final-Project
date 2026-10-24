@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,8 +35,27 @@ namespace SmartSupply
             button7.Click += btnDeleteProduct_Click;
             button9.Click += btnSearchProduct_Click;
             textBox2.KeyDown += (s, args) => { if (args.KeyCode == Keys.Enter) LoadProducts(); };
+            button14.Click += btnAddToCart_Click;
 
+            InitCart();
             RefreshAll();
+        }
+
+        private readonly DataTable cart = new DataTable();
+
+        private void InitCart()
+        {
+            cart.Columns.Add("ID", typeof(int));
+            cart.Columns.Add("Product", typeof(string));
+            cart.Columns.Add("Qty", typeof(int));
+            cart.Columns.Add("Price", typeof(decimal));
+            dataGridView4.DataSource = cart;
+            dataGridView4.Columns["ID"].Visible = false;
+            dataGridView4.Columns["Price"].DefaultCellStyle.Format = "N2";
+
+            numericUpDown1.Minimum = 1;
+            numericUpDown1.Maximum = 100000;
+            numericUpDown1.Value = 1;
         }
 
         private void RefreshAll()
@@ -44,6 +63,7 @@ namespace SmartSupply
             try
             {
                 LoadProducts();
+                LoadPosProducts();
                 LoadCategories();
                 LoadMovements();
                 LoadDashboard();
@@ -59,6 +79,15 @@ namespace SmartSupply
             if (grid.CurrentRow == null || grid.CurrentRow.Cells[column].Value == null)
                 return null;
             return Convert.ToInt32(grid.CurrentRow.Cells[column].Value);
+        }
+
+        private void LoadPosProducts()
+        {
+            dataGridView5.DataSource = DBconnection.Query(
+                "SELECT product_id AS [ID], product_name AS [Product], quantity AS [Stock], unit_price AS [Price] " +
+                "FROM products WHERE quantity > 0 ORDER BY product_name");
+            dataGridView5.Columns["ID"].Visible = false;
+            dataGridView5.Columns["Price"].DefaultCellStyle.Format = "N2";
         }
 
         private void LoadProducts()
@@ -103,6 +132,48 @@ namespace SmartSupply
         private void btnSearchProduct_Click(object sender, EventArgs e)
         {
             LoadProducts();
+        }
+
+        private void btnAddToCart_Click(object sender, EventArgs e)
+        {
+            int? id = SelectedId(dataGridView5, "ID");
+            if (id == null)
+            {
+                MessageBox.Show("Please select a product.", "POS Terminal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DataGridViewRow row = dataGridView5.CurrentRow;
+            string name = Convert.ToString(row.Cells["Product"].Value);
+            int stock = Convert.ToInt32(row.Cells["Stock"].Value);
+            decimal price = Convert.ToDecimal(row.Cells["Price"].Value);
+            int qty = (int)numericUpDown1.Value;
+
+            DataRow existing = cart.AsEnumerable().FirstOrDefault(r => r.Field<int>("ID") == id.Value);
+            int inCart = existing == null ? 0 : existing.Field<int>("Qty");
+
+            if (inCart + qty > stock)
+            {
+                MessageBox.Show($"Not enough stock for {name}.\nAvailable: {stock}, already in cart: {inCart}.", "POS Terminal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (existing == null)
+            {
+                cart.Rows.Add(id.Value, name, qty, price);
+            }
+            else
+            {
+                existing["Qty"] = inCart + qty;
+            }
+
+            numericUpDown1.Value = 1;
+            UpdateCartTotal();
+        }
+        private void UpdateCartTotal()
+        {
+            decimal total = cart.AsEnumerable().Sum(r => r.Field<decimal>("Price") * r.Field<int>("Qty"));
+            label37.Text = "\u20B1 " + total.ToString("N2");
         }
 
         private void btnDeleteProduct_Click(object sender, EventArgs e)
