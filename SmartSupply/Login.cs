@@ -46,20 +46,22 @@ namespace SmartSupply
                 return;
             }
 
+            int userId;
             try
             {
-                object count = DBconnection.Scalar(
-                    "SELECT COUNT(*) FROM users WHERE username = @username AND password_hash = @hash",
+                object found = DBconnection.Scalar(
+                    "SELECT user_id FROM users WHERE username = @username AND password_hash = @hash",
                     new SqlParameter("@username", username),
                     new SqlParameter("@hash", DBconnection.HashPassword(password)));
 
-                if (Convert.ToInt32(count) == 0)
+                if (found == null)
                 {
                     MessageBox.Show("Invalid username or password.", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBox2.Clear();
                     textBox2.Focus();
                     return;
                 }
+                userId = Convert.ToInt32(found);
             }
             catch (SqlException ex)
             {
@@ -67,7 +69,7 @@ namespace SmartSupply
                 return;
             }
 
-            frmMain Main = new frmMain();
+            frmMain Main = new frmMain(userId);
             Main.FormClosed += (s, args) => Close();
             Main.Show();
             Hide();

@@ -14,14 +14,22 @@ namespace SmartSupply
 {
     public partial class frmMain : Form
     {
-        public frmMain()
+        private readonly int currentUserId;
+        private int? viewingQuotationId;
+
+        public frmMain() : this(1)
+        {
+        }
+
+        public frmMain(int userId)
         {
             InitializeComponent();
+            currentUserId = userId;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            foreach (DataGridView grid in new[] { dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, dataGridView6 })
+            foreach (DataGridView grid in new[] { dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, dataGridView6, dataGridView7 })
             {
                 grid.ReadOnly = true;
                 grid.AllowUserToAddRows = false;
@@ -38,6 +46,9 @@ namespace SmartSupply
             button14.Click += btnAddToCart_Click;
             button11.Click += btnClearCart_Click;
             button12.Click += btnRemoveFromCart_Click;
+            btnView.Click += btnSaveQuotation_Click;
+            button1.Click += btnViewQuotation_Click;
+            btnDelete.Click += btnDeleteQuotation_Click;
 
             InitCart();
             RefreshAll();
@@ -116,7 +127,7 @@ namespace SmartSupply
                 "SELECT t.transaction_id AS [ID], t.transaction_date AS [Date], p.product_name AS [Product], " +
                 "t.transaction_type AS [Type], t.quantity AS [Quantity], t.remarks AS [Remarks] " +
                 "FROM Transactions_log t JOIN products p ON p.product_id = t.product_id " +
-                "ORDER BY t.transaction_date DESC, t.transaction_id DESC");
+                "ORDER BY t.transaction_date ASC, t.transaction_id ASC");
         }
 
         private void LoadDashboard()
@@ -379,6 +390,156 @@ namespace SmartSupply
         {
             pnlQuotation.Show();
             pnlQuotation.BringToFront();
+            try
+            {
+                LoadQuotations();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Database error.\n" + ex.Message, "SmartSupply", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadQuotations()
+        {
+            viewingQuotationId = null;
+            button1.Text = "View";
+            label68.Text = "Saved Quotation";
+            dataGridView7.DataSource = DBconnection.Query(
+                "SELECT q.quotation_id AS [ID], q.quotation_number AS [Quotation No.], q.quotation_name AS [Name], " +
+                "q.quotation_date AS [Date], u.username AS [Created By], " +
+                "ISNULL((SELECT SUM(i.total_price) FROM quotation_items i WHERE i.quotation_id = q.quotation_id), 0) AS [Total] " +
+                "FROM quotations q LEFT JOIN users u ON u.user_id = q.created_by " +
+                "ORDER BY q.quotation_id DESC");
+            dataGridView7.Columns["ID"].Visible = false;
+            dataGridView7.Columns["Total"].DefaultCellStyle.Format = "N2";
+            dataGridView7.Columns["Date"].DefaultCellStyle.Format = "d";
+        }
+
+        private void LoadQuotationItems(int quotationId, string title)
+        {
+            viewingQuotationId = quotationId;
+            button1.Text = "Back";
+            label68.Text = title;
+            dataGridView7.DataSource = DBconnection.Query(
+                "SELECT p.product_name AS [Product], i.quantity AS [Qty], i.unit_price AS [Price], i.total_price AS [Total] " +
+                "FROM quotation_items i JOIN products p ON p.product_id = i.product_id " +
+                "WHERE i.quotation_id = @id ORDER BY p.product_name",
+                new SqlParameter("@id", quotationId));
+            dataGridView7.Columns["Price"].DefaultCellStyle.Format = "N2";
+            dataGridView7.Columns["Total"].DefaultCellStyle.Format = "N2";
+        }
+
+        private void btnViewQuotation_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (viewingQuotationId != null)
+                {
+                    LoadQuotations();
+                    return;
+                }
+
+                int? id = SelectedId(dataGridView7, "ID");
+                if (id == null)
+                {
+                    MessageBox.Show("Please select a quotation.", "Quotation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                DataGridViewRow row = dataGridView7.CurrentRow;
+                string title = row.Cells["Quotation No."].Value + " - " + row.Cells["Name"].Value;
+                LoadQuotationItems(id.Value, title);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Database error.\n" + ex.Message, "SmartSupply", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDeleteQuotation_Click(object sender, EventArgs e)
+        {
+            int? id = viewingQuotationId ?? SelectedId(dataGridView7, "ID");
+            if (id == null)
+            {
+                MessageBox.Show("Please select a quotation.", "Quotation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (MessageBox.Show("Delete the selected quotation and all its items?", "Quotation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            try
+            {
+                DBconnection.Execute(
+                    "DELETE FROM quotation_items WHERE quotation_id = @id; DELETE FROM quotations WHERE quotation_id = @id;",
+                    new SqlParameter("@id", id.Value));
+                LoadQuotations();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Database error.\n" + ex.Message, "SmartSupply", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSaveQuotation_Click(object sender, EventArgs e)
+        {
+            if (cart.Rows.Count == 0)
+            {
+                MessageBox.Show("The cart is empty.", "POS Terminal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            string name;
+            using (Quotation_Name dialog = new Quotation_Name())
+            {
+                if (dialog.ShowDialog(this) != DialogResult.OK)
+                    return;
+                name = dialog.QuotationName;
+            }
+
+            try
+            {
+                string number;
+                using (SqlConnection conn = DBconnection.Open())
+                using (SqlTransaction tx = conn.BeginTransaction())
+                {
+                    int quotationId;
+                    using (SqlCommand cmd = new SqlCommand(
+                        "INSERT INTO quotations (quotation_name, created_by) VALUES (@name, @user); SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tx))
+                    {
+                        cmd.Parameters.AddWithValue("@name", name);
+                        cmd.Parameters.AddWithValue("@user", currentUserId);
+                        quotationId = (int)cmd.ExecuteScalar();
+                    }
+
+                    foreach (DataRow r in cart.Rows)
+                    {
+                        using (SqlCommand cmd = new SqlCommand(
+                            "INSERT INTO quotation_items (quotation_id, product_id, quantity, unit_price) VALUES (@qid, @pid, @qty, @price)", conn, tx))
+                        {
+                            cmd.Parameters.AddWithValue("@qid", quotationId);
+                            cmd.Parameters.AddWithValue("@pid", r.Field<int>("ID"));
+                            cmd.Parameters.AddWithValue("@qty", r.Field<int>("Qty"));
+                            cmd.Parameters.AddWithValue("@price", r.Field<decimal>("Price"));
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT quotation_number FROM quotations WHERE quotation_id = @id", conn, tx))
+                    {
+                        cmd.Parameters.AddWithValue("@id", quotationId);
+                        number = Convert.ToString(cmd.ExecuteScalar());
+                    }
+
+                    tx.Commit();
+                }
+
+                MessageBox.Show($"Quotation {number} saved.", "POS Terminal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Database error.\n" + ex.Message, "SmartSupply", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -71,7 +71,7 @@
             this.label43 = new System.Windows.Forms.Label();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.panel20 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnView = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
@@ -157,6 +157,7 @@
             this.label68 = new System.Windows.Forms.Label();
             this.dataGridView7 = new System.Windows.Forms.DataGridView();
             this.label69 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlInventoryMovements.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -766,7 +767,7 @@
             // panel20
             // 
             this.panel20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel20.Controls.Add(this.button3);
+            this.panel20.Controls.Add(this.btnView);
             this.panel20.Controls.Add(this.button11);
             this.panel20.Controls.Add(this.button12);
             this.panel20.Controls.Add(this.button13);
@@ -784,19 +785,19 @@
             this.panel20.Size = new System.Drawing.Size(412, 549);
             this.panel20.TabIndex = 41;
             // 
-            // button3
+            // btnView
             // 
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.Location = new System.Drawing.Point(173, 505);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(123, 28);
-            this.button3.TabIndex = 43;
-            this.button3.Text = "Saved Quotation";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnView.BackColor = System.Drawing.Color.White;
+            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnView.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnView.ForeColor = System.Drawing.Color.Black;
+            this.btnView.Location = new System.Drawing.Point(173, 505);
+            this.btnView.Margin = new System.Windows.Forms.Padding(2);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(123, 28);
+            this.btnView.TabIndex = 43;
+            this.btnView.Text = "Saved Quotation";
+            this.btnView.UseVisualStyleBackColor = false;
             // 
             // button11
             // 
@@ -1743,6 +1744,7 @@
             // pnlQuotation
             // 
             this.pnlQuotation.BackColor = System.Drawing.Color.White;
+            this.pnlQuotation.Controls.Add(this.btnDelete);
             this.pnlQuotation.Controls.Add(this.button1);
             this.pnlQuotation.Controls.Add(this.panel9);
             this.pnlQuotation.Controls.Add(this.label68);
@@ -1827,19 +1829,33 @@
             this.label69.Size = new System.Drawing.Size(0, 21);
             this.label69.TabIndex = 38;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.White;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.ForeColor = System.Drawing.Color.Black;
+            this.btnDelete.Location = new System.Drawing.Point(590, 91);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(125, 28);
+            this.btnDelete.TabIndex = 61;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 653);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pnlPOSTerminal);
-            this.Controls.Add(this.pnlProducts);
-            this.Controls.Add(this.pnlCategories);
             this.Controls.Add(this.pnlQuotation);
             this.Controls.Add(this.pnlInventoryMovements);
             this.Controls.Add(this.pnlPriceCalculator);
             this.Controls.Add(this.pnlDashboard);
+            this.Controls.Add(this.pnlPOSTerminal);
+            this.Controls.Add(this.pnlProducts);
+            this.Controls.Add(this.pnlCategories);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMain";
@@ -1997,7 +2013,7 @@
         private System.Windows.Forms.DataGridView dataGridView7;
         private System.Windows.Forms.Label label69;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblMarginUsed;
         private System.Windows.Forms.Label lblSuggestedPrice;
@@ -2040,6 +2056,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblSellingPrice;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
 
