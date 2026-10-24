@@ -33,7 +33,6 @@ namespace SmartSupply
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadProducts();
             foreach (DataGridView grid in new[] { dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, dataGridView6 })
             {
                 grid.ReadOnly = true;
