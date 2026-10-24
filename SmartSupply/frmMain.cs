@@ -36,6 +36,8 @@ namespace SmartSupply
             button9.Click += btnSearchProduct_Click;
             textBox2.KeyDown += (s, args) => { if (args.KeyCode == Keys.Enter) LoadProducts(); };
             button14.Click += btnAddToCart_Click;
+            button11.Click += btnClearCart_Click;
+            button12.Click += btnRemoveFromCart_Click;
 
             InitCart();
             RefreshAll();
@@ -174,6 +176,32 @@ namespace SmartSupply
         {
             decimal total = cart.AsEnumerable().Sum(r => r.Field<decimal>("Price") * r.Field<int>("Qty"));
             label37.Text = "\u20B1 " + total.ToString("N2");
+        }
+
+        private void btnRemoveFromCart_Click(object sender, EventArgs e)
+        {
+            int? id = SelectedId(dataGridView4, "ID");
+            if (id == null)
+            {
+                MessageBox.Show("Please select an item in the cart.", "POS Terminal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DataRow row = cart.AsEnumerable().FirstOrDefault(r => r.Field<int>("ID") == id.Value);
+            if (row != null)
+                cart.Rows.Remove(row);
+            UpdateCartTotal();
+        }
+
+        private void btnClearCart_Click(object sender, EventArgs e)
+        {
+            if (cart.Rows.Count == 0)
+                return;
+            if (MessageBox.Show("Clear all items from the cart?", "POS Terminal", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            cart.Rows.Clear();
+            UpdateCartTotal();
         }
 
         private void btnDeleteProduct_Click(object sender, EventArgs e)
@@ -345,6 +373,12 @@ namespace SmartSupply
         private void label43_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnQuatation_Click(object sender, EventArgs e)
+        {
+            pnlQuotation.Show();
+            pnlQuotation.BringToFront();
         }
     }
 }

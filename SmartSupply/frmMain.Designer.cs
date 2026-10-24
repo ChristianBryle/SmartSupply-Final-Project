@@ -150,7 +150,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlQuotation = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label58 = new System.Windows.Forms.Label();
@@ -190,7 +190,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudTotalCostMarkUp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantityMarkUp)).BeginInit();
             this.panel5.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.pnlQuotation.SuspendLayout();
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
             this.SuspendLayout();
@@ -226,9 +226,10 @@
             this.btnQuatation.Name = "btnQuatation";
             this.btnQuatation.Size = new System.Drawing.Size(165, 36);
             this.btnQuatation.TabIndex = 10;
-            this.btnQuatation.Text = "Quatation";
+            this.btnQuatation.Text = "Quotation";
             this.btnQuatation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnQuatation.UseVisualStyleBackColor = true;
+            this.btnQuatation.Click += new System.EventHandler(this.btnQuatation_Click);
             // 
             // label57
             // 
@@ -841,13 +842,12 @@
             // 
             // label35
             // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.ForeColor = System.Drawing.Color.Lime;
-            this.label35.Location = new System.Drawing.Point(339, 474);
+            this.label35.Location = new System.Drawing.Point(231, 452);
             this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(59, 21);
+            this.label35.Size = new System.Drawing.Size(170, 30);
             this.label35.TabIndex = 40;
             this.label35.Text = " ₱ 0.00";
             this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -855,7 +855,7 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(223, 445);
+            this.textBox3.Location = new System.Drawing.Point(222, 424);
             this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(178, 26);
@@ -863,13 +863,12 @@
             // 
             // label37
             // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.Color.Black;
-            this.label37.Location = new System.Drawing.Point(319, 408);
+            this.label37.Location = new System.Drawing.Point(223, 392);
             this.label37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(78, 30);
+            this.label37.Size = new System.Drawing.Size(178, 30);
             this.label37.TabIndex = 38;
             this.label37.Text = "₱ 0.00";
             this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -877,21 +876,21 @@
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label38.ForeColor = System.Drawing.Color.Black;
-            this.label38.Location = new System.Drawing.Point(14, 479);
+            this.label38.Location = new System.Drawing.Point(12, 452);
             this.label38.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(56, 19);
+            this.label38.Size = new System.Drawing.Size(93, 30);
             this.label38.TabIndex = 37;
-            this.label38.Text = "Change";
+            this.label38.Text = "Change:";
             // 
             // label40
             // 
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label40.ForeColor = System.Drawing.Color.Black;
-            this.label40.Location = new System.Drawing.Point(14, 448);
+            this.label40.Location = new System.Drawing.Point(13, 427);
             this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(113, 19);
@@ -901,12 +900,12 @@
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label41.ForeColor = System.Drawing.Color.Black;
-            this.label41.Location = new System.Drawing.Point(12, 408);
+            this.label41.Location = new System.Drawing.Point(12, 392);
             this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(70, 30);
+            this.label41.Size = new System.Drawing.Size(67, 30);
             this.label41.TabIndex = 35;
             this.label41.Text = "Total:";
             // 
@@ -919,7 +918,7 @@
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.RowHeadersWidth = 51;
             this.dataGridView4.RowTemplate.Height = 24;
-            this.dataGridView4.Size = new System.Drawing.Size(391, 352);
+            this.dataGridView4.Size = new System.Drawing.Size(391, 329);
             this.dataGridView4.TabIndex = 34;
             // 
             // label42
@@ -1741,19 +1740,19 @@
             this.label8.TabIndex = 31;
             this.label8.Text = "Price Calculator";
             // 
-            // panel3
+            // pnlQuotation
             // 
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.panel9);
-            this.panel3.Controls.Add(this.label68);
-            this.panel3.Controls.Add(this.dataGridView7);
-            this.panel3.Controls.Add(this.label69);
-            this.panel3.Location = new System.Drawing.Point(205, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(854, 653);
-            this.panel3.TabIndex = 66;
+            this.pnlQuotation.BackColor = System.Drawing.Color.White;
+            this.pnlQuotation.Controls.Add(this.button1);
+            this.pnlQuotation.Controls.Add(this.panel9);
+            this.pnlQuotation.Controls.Add(this.label68);
+            this.pnlQuotation.Controls.Add(this.dataGridView7);
+            this.pnlQuotation.Controls.Add(this.label69);
+            this.pnlQuotation.Location = new System.Drawing.Point(205, 0);
+            this.pnlQuotation.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlQuotation.Name = "pnlQuotation";
+            this.pnlQuotation.Size = new System.Drawing.Size(854, 653);
+            this.pnlQuotation.TabIndex = 66;
             // 
             // button1
             // 
@@ -1788,9 +1787,9 @@
             this.label58.Location = new System.Drawing.Point(9, 20);
             this.label58.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(146, 37);
+            this.label58.Size = new System.Drawing.Size(148, 37);
             this.label58.TabIndex = 30;
-            this.label58.Text = "Quatation";
+            this.label58.Text = "Quotation";
             this.label58.Click += new System.EventHandler(this.label58_Click);
             // 
             // label68
@@ -1801,9 +1800,9 @@
             this.label68.Location = new System.Drawing.Point(11, 93);
             this.label68.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(154, 25);
+            this.label68.Size = new System.Drawing.Size(155, 25);
             this.label68.TabIndex = 44;
-            this.label68.Text = "Saved Quatation";
+            this.label68.Text = "Saved Quotation";
             // 
             // dataGridView7
             // 
@@ -1837,7 +1836,7 @@
             this.Controls.Add(this.pnlPOSTerminal);
             this.Controls.Add(this.pnlProducts);
             this.Controls.Add(this.pnlCategories);
-            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.pnlQuotation);
             this.Controls.Add(this.pnlInventoryMovements);
             this.Controls.Add(this.pnlPriceCalculator);
             this.Controls.Add(this.pnlDashboard);
@@ -1901,8 +1900,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantityMarkUp)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.pnlQuotation.ResumeLayout(false);
+            this.pnlQuotation.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).EndInit();
@@ -1991,7 +1990,7 @@
         private System.Windows.Forms.DataGridView dataGridView6;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.Button btnQuatation;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlQuotation;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label58;
         private System.Windows.Forms.Label label68;
