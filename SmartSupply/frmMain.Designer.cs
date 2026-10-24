@@ -209,7 +209,7 @@
             this.panel1.Controls.Add(this.btnDashboard);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(204, 653);
             this.panel1.TabIndex = 0;
@@ -222,7 +222,7 @@
             this.btnQuatation.ForeColor = System.Drawing.Color.White;
             this.btnQuatation.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btnQuatation.Location = new System.Drawing.Point(14, 345);
-            this.btnQuatation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnQuatation.Margin = new System.Windows.Forms.Padding(2);
             this.btnQuatation.Name = "btnQuatation";
             this.btnQuatation.Size = new System.Drawing.Size(165, 36);
             this.btnQuatation.TabIndex = 10;
@@ -250,7 +250,7 @@
             this.brtnPriceCalculator.ForeColor = System.Drawing.Color.White;
             this.brtnPriceCalculator.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.brtnPriceCalculator.Location = new System.Drawing.Point(14, 306);
-            this.brtnPriceCalculator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.brtnPriceCalculator.Margin = new System.Windows.Forms.Padding(2);
             this.brtnPriceCalculator.Name = "brtnPriceCalculator";
             this.brtnPriceCalculator.Size = new System.Drawing.Size(165, 36);
             this.brtnPriceCalculator.TabIndex = 8;
@@ -267,7 +267,7 @@
             this.btnExit.ForeColor = System.Drawing.Color.White;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btnExit.Location = new System.Drawing.Point(17, 608);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(2);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(165, 36);
             this.btnExit.TabIndex = 7;
@@ -283,7 +283,7 @@
             this.btnCategories.ForeColor = System.Drawing.Color.White;
             this.btnCategories.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btnCategories.Location = new System.Drawing.Point(14, 225);
-            this.btnCategories.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCategories.Margin = new System.Windows.Forms.Padding(2);
             this.btnCategories.Name = "btnCategories";
             this.btnCategories.Size = new System.Drawing.Size(165, 36);
             this.btnCategories.TabIndex = 5;
@@ -300,7 +300,7 @@
             this.btnInventoryMovements.ForeColor = System.Drawing.Color.White;
             this.btnInventoryMovements.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btnInventoryMovements.Location = new System.Drawing.Point(14, 266);
-            this.btnInventoryMovements.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnInventoryMovements.Margin = new System.Windows.Forms.Padding(2);
             this.btnInventoryMovements.Name = "btnInventoryMovements";
             this.btnInventoryMovements.Size = new System.Drawing.Size(165, 36);
             this.btnInventoryMovements.TabIndex = 4;
@@ -317,7 +317,7 @@
             this.btnPOS.ForeColor = System.Drawing.Color.White;
             this.btnPOS.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btnPOS.Location = new System.Drawing.Point(14, 144);
-            this.btnPOS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPOS.Margin = new System.Windows.Forms.Padding(2);
             this.btnPOS.Name = "btnPOS";
             this.btnPOS.Size = new System.Drawing.Size(165, 36);
             this.btnPOS.TabIndex = 3;
@@ -334,7 +334,7 @@
             this.btnProduct.ForeColor = System.Drawing.Color.White;
             this.btnProduct.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btnProduct.Location = new System.Drawing.Point(14, 184);
-            this.btnProduct.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnProduct.Margin = new System.Windows.Forms.Padding(2);
             this.btnProduct.Name = "btnProduct";
             this.btnProduct.Size = new System.Drawing.Size(165, 36);
             this.btnProduct.TabIndex = 2;
@@ -351,7 +351,7 @@
             this.btnDashboard.ForeColor = System.Drawing.Color.White;
             this.btnDashboard.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btnDashboard.Location = new System.Drawing.Point(14, 103);
-            this.btnDashboard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDashboard.Margin = new System.Windows.Forms.Padding(2);
             this.btnDashboard.Name = "btnDashboard";
             this.btnDashboard.Size = new System.Drawing.Size(165, 36);
             this.btnDashboard.TabIndex = 1;
@@ -375,16 +375,17 @@
             // pnlInventoryMovements
             // 
             this.pnlInventoryMovements.BackColor = System.Drawing.Color.White;
-            this.pnlInventoryMovements.Controls.Add(this.panel8);
             this.pnlInventoryMovements.Controls.Add(this.dataGridView1);
             this.pnlInventoryMovements.Controls.Add(this.btnStockOut);
             this.pnlInventoryMovements.Controls.Add(this.btnStockIn);
             this.pnlInventoryMovements.Controls.Add(this.label39);
+            this.pnlInventoryMovements.Controls.Add(this.panel8);
             this.pnlInventoryMovements.Location = new System.Drawing.Point(205, 0);
-            this.pnlInventoryMovements.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlInventoryMovements.Margin = new System.Windows.Forms.Padding(2);
             this.pnlInventoryMovements.Name = "pnlInventoryMovements";
             this.pnlInventoryMovements.Size = new System.Drawing.Size(854, 653);
             this.pnlInventoryMovements.TabIndex = 43;
+            this.pnlInventoryMovements.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlInventoryMovements_Paint);
             // 
             // panel8
             // 
@@ -392,7 +393,7 @@
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel8.Controls.Add(this.label17);
             this.panel8.Location = new System.Drawing.Point(0, 0);
-            this.panel8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(854, 79);
             this.panel8.TabIndex = 58;
@@ -414,7 +415,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(11, 149);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
@@ -428,7 +429,7 @@
             this.btnStockOut.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStockOut.ForeColor = System.Drawing.Color.Black;
             this.btnStockOut.Location = new System.Drawing.Point(141, 102);
-            this.btnStockOut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStockOut.Margin = new System.Windows.Forms.Padding(2);
             this.btnStockOut.Name = "btnStockOut";
             this.btnStockOut.Size = new System.Drawing.Size(128, 28);
             this.btnStockOut.TabIndex = 60;
@@ -443,7 +444,7 @@
             this.btnStockIn.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStockIn.ForeColor = System.Drawing.Color.White;
             this.btnStockIn.Location = new System.Drawing.Point(11, 102);
-            this.btnStockIn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStockIn.Margin = new System.Windows.Forms.Padding(2);
             this.btnStockIn.Name = "btnStockIn";
             this.btnStockIn.Size = new System.Drawing.Size(125, 28);
             this.btnStockIn.TabIndex = 59;
@@ -471,7 +472,7 @@
             this.pnlCategories.Controls.Add(this.textBox1);
             this.pnlCategories.Controls.Add(this.label19);
             this.pnlCategories.Location = new System.Drawing.Point(205, 0);
-            this.pnlCategories.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCategories.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCategories.Name = "pnlCategories";
             this.pnlCategories.Size = new System.Drawing.Size(854, 653);
             this.pnlCategories.TabIndex = 62;
@@ -482,7 +483,7 @@
             this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel15.Controls.Add(this.label18);
             this.panel15.Location = new System.Drawing.Point(0, 0);
-            this.panel15.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel15.Margin = new System.Windows.Forms.Padding(2);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(854, 79);
             this.panel15.TabIndex = 53;
@@ -504,7 +505,7 @@
             this.dataGridView2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(11, 147);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 24;
@@ -518,7 +519,7 @@
             this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.Black;
             this.button2.Location = new System.Drawing.Point(367, 101);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(128, 28);
             this.button2.TabIndex = 56;
@@ -532,7 +533,7 @@
             this.btnAddCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddCategory.ForeColor = System.Drawing.Color.White;
             this.btnAddCategory.Location = new System.Drawing.Point(237, 101);
-            this.btnAddCategory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddCategory.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddCategory.Name = "btnAddCategory";
             this.btnAddCategory.Size = new System.Drawing.Size(125, 28);
             this.btnAddCategory.TabIndex = 55;
@@ -544,7 +545,7 @@
             // 
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(11, 99);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(222, 29);
             this.textBox1.TabIndex = 54;
@@ -571,7 +572,7 @@
             this.pnlProducts.Controls.Add(this.textBox2);
             this.pnlProducts.Controls.Add(this.label34);
             this.pnlProducts.Location = new System.Drawing.Point(205, 0);
-            this.pnlProducts.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlProducts.Margin = new System.Windows.Forms.Padding(2);
             this.pnlProducts.Name = "pnlProducts";
             this.pnlProducts.Size = new System.Drawing.Size(854, 653);
             this.pnlProducts.TabIndex = 63;
@@ -582,7 +583,7 @@
             this.panel17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel17.Controls.Add(this.label33);
             this.panel17.Location = new System.Drawing.Point(0, 2);
-            this.panel17.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel17.Margin = new System.Windows.Forms.Padding(2);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(854, 79);
             this.panel17.TabIndex = 46;
@@ -604,7 +605,7 @@
             this.dataGridView3.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Location = new System.Drawing.Point(11, 149);
-            this.dataGridView3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView3.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersWidth = 51;
             this.dataGridView3.RowTemplate.Height = 24;
@@ -618,7 +619,7 @@
             this.button7.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button7.ForeColor = System.Drawing.Color.Black;
             this.button7.Location = new System.Drawing.Point(560, 102);
-            this.button7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button7.Margin = new System.Windows.Forms.Padding(2);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(99, 28);
             this.button7.TabIndex = 51;
@@ -632,7 +633,7 @@
             this.btnEditSelected.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditSelected.ForeColor = System.Drawing.Color.Black;
             this.btnEditSelected.Location = new System.Drawing.Point(456, 102);
-            this.btnEditSelected.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEditSelected.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditSelected.Name = "btnEditSelected";
             this.btnEditSelected.Size = new System.Drawing.Size(99, 28);
             this.btnEditSelected.TabIndex = 50;
@@ -647,7 +648,7 @@
             this.button9.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button9.ForeColor = System.Drawing.Color.Black;
             this.button9.Location = new System.Drawing.Point(237, 102);
-            this.button9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button9.Margin = new System.Windows.Forms.Padding(2);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(99, 28);
             this.button9.TabIndex = 49;
@@ -661,7 +662,7 @@
             this.btnAddProduct.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddProduct.ForeColor = System.Drawing.Color.White;
             this.btnAddProduct.Location = new System.Drawing.Point(340, 102);
-            this.btnAddProduct.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddProduct.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddProduct.Name = "btnAddProduct";
             this.btnAddProduct.Size = new System.Drawing.Size(111, 28);
             this.btnAddProduct.TabIndex = 48;
@@ -673,7 +674,7 @@
             // 
             this.textBox2.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(11, 101);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(222, 29);
             this.textBox2.TabIndex = 47;
@@ -696,7 +697,7 @@
             this.pnlPOSTerminal.Controls.Add(this.panel21);
             this.pnlPOSTerminal.Controls.Add(this.label36);
             this.pnlPOSTerminal.Location = new System.Drawing.Point(205, 0);
-            this.pnlPOSTerminal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlPOSTerminal.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPOSTerminal.Name = "pnlPOSTerminal";
             this.pnlPOSTerminal.Size = new System.Drawing.Size(854, 653);
             this.pnlPOSTerminal.TabIndex = 64;
@@ -709,7 +710,7 @@
             this.panel19.Controls.Add(this.label43);
             this.panel19.Controls.Add(this.dataGridView5);
             this.panel19.Location = new System.Drawing.Point(11, 95);
-            this.panel19.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel19.Margin = new System.Windows.Forms.Padding(2);
             this.panel19.Name = "panel19";
             this.panel19.Size = new System.Drawing.Size(420, 549);
             this.panel19.TabIndex = 40;
@@ -718,7 +719,7 @@
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDown1.Location = new System.Drawing.Point(11, 505);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(77, 29);
             this.numericUpDown1.TabIndex = 33;
@@ -730,7 +731,7 @@
             this.button14.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button14.ForeColor = System.Drawing.Color.White;
             this.button14.Location = new System.Drawing.Point(102, 505);
-            this.button14.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button14.Margin = new System.Windows.Forms.Padding(2);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(99, 28);
             this.button14.TabIndex = 32;
@@ -755,7 +756,7 @@
             this.dataGridView5.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView5.Location = new System.Drawing.Point(9, 54);
-            this.dataGridView5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView5.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView5.Name = "dataGridView5";
             this.dataGridView5.RowHeadersWidth = 51;
             this.dataGridView5.RowTemplate.Height = 24;
@@ -778,7 +779,7 @@
             this.panel20.Controls.Add(this.dataGridView4);
             this.panel20.Controls.Add(this.label42);
             this.panel20.Location = new System.Drawing.Point(436, 95);
-            this.panel20.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel20.Margin = new System.Windows.Forms.Padding(2);
             this.panel20.Name = "panel20";
             this.panel20.Size = new System.Drawing.Size(412, 549);
             this.panel20.TabIndex = 41;
@@ -790,7 +791,7 @@
             this.button3.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.Black;
             this.button3.Location = new System.Drawing.Point(173, 505);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(123, 28);
             this.button3.TabIndex = 43;
@@ -804,7 +805,7 @@
             this.button11.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button11.ForeColor = System.Drawing.Color.Black;
             this.button11.Location = new System.Drawing.Point(13, 505);
-            this.button11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button11.Margin = new System.Windows.Forms.Padding(2);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(75, 28);
             this.button11.TabIndex = 42;
@@ -818,7 +819,7 @@
             this.button12.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button12.ForeColor = System.Drawing.Color.Black;
             this.button12.Location = new System.Drawing.Point(92, 505);
-            this.button12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button12.Margin = new System.Windows.Forms.Padding(2);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(78, 28);
             this.button12.TabIndex = 41;
@@ -832,7 +833,7 @@
             this.button13.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button13.ForeColor = System.Drawing.Color.White;
             this.button13.Location = new System.Drawing.Point(300, 505);
-            this.button13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button13.Margin = new System.Windows.Forms.Padding(2);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(99, 28);
             this.button13.TabIndex = 34;
@@ -856,7 +857,7 @@
             // 
             this.textBox3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.Location = new System.Drawing.Point(223, 445);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(178, 26);
             this.textBox3.TabIndex = 39;
@@ -915,7 +916,7 @@
             this.dataGridView4.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView4.Location = new System.Drawing.Point(10, 54);
-            this.dataGridView4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView4.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.RowHeadersWidth = 51;
             this.dataGridView4.RowTemplate.Height = 24;
@@ -940,7 +941,7 @@
             this.panel21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel21.Controls.Add(this.label44);
             this.panel21.Location = new System.Drawing.Point(0, 0);
-            this.panel21.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel21.Margin = new System.Windows.Forms.Padding(2);
             this.panel21.Name = "panel21";
             this.panel21.Size = new System.Drawing.Size(854, 79);
             this.panel21.TabIndex = 39;
@@ -979,7 +980,7 @@
             this.pnlDashboard.Controls.Add(this.dataGridView6);
             this.pnlDashboard.Controls.Add(this.label53);
             this.pnlDashboard.Location = new System.Drawing.Point(205, 0);
-            this.pnlDashboard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlDashboard.Margin = new System.Windows.Forms.Padding(2);
             this.pnlDashboard.Name = "pnlDashboard";
             this.pnlDashboard.Size = new System.Drawing.Size(854, 653);
             this.pnlDashboard.TabIndex = 65;
@@ -990,7 +991,7 @@
             this.panel23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel23.Controls.Add(this.label45);
             this.panel23.Location = new System.Drawing.Point(0, 0);
-            this.panel23.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel23.Margin = new System.Windows.Forms.Padding(2);
             this.panel23.Name = "panel23";
             this.panel23.Size = new System.Drawing.Size(854, 79);
             this.panel23.TabIndex = 39;
@@ -1014,7 +1015,7 @@
             this.panel24.Controls.Add(this.label47);
             this.panel24.Controls.Add(this.label48);
             this.panel24.Location = new System.Drawing.Point(29, 117);
-            this.panel24.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel24.Margin = new System.Windows.Forms.Padding(2);
             this.panel24.Name = "panel24";
             this.panel24.Size = new System.Drawing.Size(210, 98);
             this.panel24.TabIndex = 40;
@@ -1061,7 +1062,7 @@
             this.panel25.Controls.Add(this.label50);
             this.panel25.Controls.Add(this.label51);
             this.panel25.Location = new System.Drawing.Point(305, 117);
-            this.panel25.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel25.Margin = new System.Windows.Forms.Padding(2);
             this.panel25.Name = "panel25";
             this.panel25.Size = new System.Drawing.Size(210, 98);
             this.panel25.TabIndex = 41;
@@ -1108,7 +1109,7 @@
             this.panel26.Controls.Add(this.label54);
             this.panel26.Controls.Add(this.label55);
             this.panel26.Location = new System.Drawing.Point(595, 119);
-            this.panel26.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel26.Margin = new System.Windows.Forms.Padding(2);
             this.panel26.Name = "panel26";
             this.panel26.Size = new System.Drawing.Size(210, 98);
             this.panel26.TabIndex = 42;
@@ -1167,7 +1168,7 @@
             this.dataGridView6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView6.Location = new System.Drawing.Point(11, 278);
-            this.dataGridView6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView6.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView6.Name = "dataGridView6";
             this.dataGridView6.RowHeadersWidth = 51;
             this.dataGridView6.RowTemplate.Height = 24;
@@ -1194,7 +1195,7 @@
             this.pnlPriceCalculator.Controls.Add(this.panel6);
             this.pnlPriceCalculator.Controls.Add(this.panel10);
             this.pnlPriceCalculator.Location = new System.Drawing.Point(205, 0);
-            this.pnlPriceCalculator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlPriceCalculator.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPriceCalculator.Name = "pnlPriceCalculator";
             this.pnlPriceCalculator.Size = new System.Drawing.Size(854, 654);
             this.pnlPriceCalculator.TabIndex = 2;
@@ -1212,7 +1213,7 @@
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.label15);
             this.panel4.Location = new System.Drawing.Point(470, 98);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(378, 256);
             this.panel4.TabIndex = 41;
@@ -1341,7 +1342,7 @@
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.label8);
             this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(854, 79);
             this.panel5.TabIndex = 39;
@@ -1367,7 +1368,7 @@
             this.panel6.Controls.Add(this.comboBox1);
             this.panel6.Controls.Add(this.panel2);
             this.panel6.Location = new System.Drawing.Point(11, 98);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(451, 527);
             this.panel6.TabIndex = 40;
@@ -1375,7 +1376,7 @@
             // panel7
             // 
             this.panel7.Location = new System.Drawing.Point(467, 171);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(360, 355);
             this.panel7.TabIndex = 35;
@@ -1409,7 +1410,7 @@
             this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(34, 129);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(378, 29);
             this.comboBox1.TabIndex = 21;
@@ -1425,7 +1426,7 @@
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Location = new System.Drawing.Point(34, 188);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(377, 165);
             this.panel2.TabIndex = 20;
@@ -1434,7 +1435,7 @@
             // 
             this.nudTotalCost.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudTotalCost.Location = new System.Drawing.Point(189, 43);
-            this.nudTotalCost.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nudTotalCost.Margin = new System.Windows.Forms.Padding(2);
             this.nudTotalCost.Name = "nudTotalCost";
             this.nudTotalCost.Size = new System.Drawing.Size(153, 29);
             this.nudTotalCost.TabIndex = 7;
@@ -1443,7 +1444,7 @@
             // 
             this.nudQuantity.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudQuantity.Location = new System.Drawing.Point(16, 43);
-            this.nudQuantity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nudQuantity.Margin = new System.Windows.Forms.Padding(2);
             this.nudQuantity.Name = "nudQuantity";
             this.nudQuantity.Size = new System.Drawing.Size(153, 29);
             this.nudQuantity.TabIndex = 6;
@@ -1452,7 +1453,7 @@
             // 
             this.btnMarkUp.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMarkUp.Location = new System.Drawing.Point(189, 99);
-            this.btnMarkUp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnMarkUp.Margin = new System.Windows.Forms.Padding(2);
             this.btnMarkUp.Name = "btnMarkUp";
             this.btnMarkUp.Size = new System.Drawing.Size(153, 28);
             this.btnMarkUp.TabIndex = 5;
@@ -1464,7 +1465,7 @@
             // 
             this.btnSmartMargin.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSmartMargin.Location = new System.Drawing.Point(16, 99);
-            this.btnSmartMargin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSmartMargin.Margin = new System.Windows.Forms.Padding(2);
             this.btnSmartMargin.Name = "btnSmartMargin";
             this.btnSmartMargin.Size = new System.Drawing.Size(153, 28);
             this.btnSmartMargin.TabIndex = 4;
@@ -1505,7 +1506,7 @@
             this.panel10.Controls.Add(this.panel13);
             this.panel10.Controls.Add(this.panel14);
             this.panel10.Location = new System.Drawing.Point(470, 358);
-            this.panel10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel10.Margin = new System.Windows.Forms.Padding(2);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(378, 267);
             this.panel10.TabIndex = 42;
@@ -1516,7 +1517,7 @@
             this.panel11.Controls.Add(this.label21);
             this.panel11.Controls.Add(this.label22);
             this.panel11.Location = new System.Drawing.Point(194, 48);
-            this.panel11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel11.Margin = new System.Windows.Forms.Padding(2);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(175, 85);
             this.panel11.TabIndex = 28;
@@ -1564,7 +1565,7 @@
             this.panel12.Controls.Add(this.label24);
             this.panel12.Controls.Add(this.label25);
             this.panel12.Location = new System.Drawing.Point(194, 150);
-            this.panel12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel12.Margin = new System.Windows.Forms.Padding(2);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(175, 86);
             this.panel12.TabIndex = 29;
@@ -1624,7 +1625,7 @@
             this.panel13.Controls.Add(this.label28);
             this.panel13.Controls.Add(this.label29);
             this.panel13.Location = new System.Drawing.Point(9, 48);
-            this.panel13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel13.Margin = new System.Windows.Forms.Padding(2);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(175, 85);
             this.panel13.TabIndex = 27;
@@ -1670,7 +1671,7 @@
             this.panel14.Controls.Add(this.label31);
             this.panel14.Controls.Add(this.label32);
             this.panel14.Location = new System.Drawing.Point(9, 150);
-            this.panel14.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel14.Margin = new System.Windows.Forms.Padding(2);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(175, 86);
             this.panel14.TabIndex = 27;
@@ -1719,7 +1720,7 @@
             this.panel3.Controls.Add(this.dataGridView7);
             this.panel3.Controls.Add(this.label69);
             this.panel3.Location = new System.Drawing.Point(205, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(854, 653);
             this.panel3.TabIndex = 66;
@@ -1731,7 +1732,7 @@
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(719, 91);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 28);
             this.button1.TabIndex = 60;
@@ -1744,7 +1745,7 @@
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel9.Controls.Add(this.label58);
             this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel9.Margin = new System.Windows.Forms.Padding(2);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(854, 79);
             this.panel9.TabIndex = 39;
@@ -1780,7 +1781,7 @@
             this.dataGridView7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView7.Location = new System.Drawing.Point(16, 134);
-            this.dataGridView7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView7.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView7.Name = "dataGridView7";
             this.dataGridView7.RowHeadersWidth = 51;
             this.dataGridView7.RowTemplate.Height = 24;
@@ -1803,15 +1804,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 653);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlPriceCalculator);
             this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.pnlPOSTerminal);
             this.Controls.Add(this.pnlProducts);
             this.Controls.Add(this.pnlCategories);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnlInventoryMovements);
-            this.Controls.Add(this.pnlPriceCalculator);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMain";
             this.Text = "SmartSupply";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -275,5 +275,10 @@ namespace SmartSupply
         {
 
         }
+
+        private void pnlInventoryMovements_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
