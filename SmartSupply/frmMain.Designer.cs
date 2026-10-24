@@ -208,7 +208,7 @@
             this.panel1.Controls.Add(this.btnProduct);
             this.panel1.Controls.Add(this.btnDashboard);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(-4, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(272, 804);
@@ -362,7 +362,7 @@
             this.pnlInventoryMovements.Controls.Add(this.btnStockOut);
             this.pnlInventoryMovements.Controls.Add(this.btnStockIn);
             this.pnlInventoryMovements.Controls.Add(this.label39);
-            this.pnlInventoryMovements.Location = new System.Drawing.Point(258, 0);
+            this.pnlInventoryMovements.Location = new System.Drawing.Point(273, 0);
             this.pnlInventoryMovements.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlInventoryMovements.Name = "pnlInventoryMovements";
             this.pnlInventoryMovements.Size = new System.Drawing.Size(1139, 804);
@@ -450,7 +450,7 @@
             this.pnlCategories.Controls.Add(this.btnAddCategory);
             this.pnlCategories.Controls.Add(this.textBox1);
             this.pnlCategories.Controls.Add(this.label19);
-            this.pnlCategories.Location = new System.Drawing.Point(258, 0);
+            this.pnlCategories.Location = new System.Drawing.Point(273, 0);
             this.pnlCategories.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlCategories.Name = "pnlCategories";
             this.pnlCategories.Size = new System.Drawing.Size(1139, 804);
@@ -548,7 +548,7 @@
             this.pnlProducts.Controls.Add(this.btnAddProduct);
             this.pnlProducts.Controls.Add(this.textBox2);
             this.pnlProducts.Controls.Add(this.label34);
-            this.pnlProducts.Location = new System.Drawing.Point(258, 0);
+            this.pnlProducts.Location = new System.Drawing.Point(273, 0);
             this.pnlProducts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlProducts.Name = "pnlProducts";
             this.pnlProducts.Size = new System.Drawing.Size(1139, 804);
@@ -671,7 +671,7 @@
             this.pnlPOSTerminal.Controls.Add(this.panel20);
             this.pnlPOSTerminal.Controls.Add(this.panel21);
             this.pnlPOSTerminal.Controls.Add(this.label36);
-            this.pnlPOSTerminal.Location = new System.Drawing.Point(258, 0);
+            this.pnlPOSTerminal.Location = new System.Drawing.Point(273, 0);
             this.pnlPOSTerminal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlPOSTerminal.Name = "pnlPOSTerminal";
             this.pnlPOSTerminal.Size = new System.Drawing.Size(1139, 804);
@@ -930,7 +930,7 @@
             this.pnlDashboard.Controls.Add(this.label56);
             this.pnlDashboard.Controls.Add(this.dataGridView6);
             this.pnlDashboard.Controls.Add(this.label53);
-            this.pnlDashboard.Location = new System.Drawing.Point(258, 0);
+            this.pnlDashboard.Location = new System.Drawing.Point(273, 0);
             this.pnlDashboard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDashboard.Name = "pnlDashboard";
             this.pnlDashboard.Size = new System.Drawing.Size(1139, 804);
@@ -1133,7 +1133,7 @@
             this.pnlPriceCalculator.Controls.Add(this.panel5);
             this.pnlPriceCalculator.Controls.Add(this.panel6);
             this.pnlPriceCalculator.Controls.Add(this.panel10);
-            this.pnlPriceCalculator.Location = new System.Drawing.Point(258, 0);
+            this.pnlPriceCalculator.Location = new System.Drawing.Point(273, 0);
             this.pnlPriceCalculator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlPriceCalculator.Name = "pnlPriceCalculator";
             this.pnlPriceCalculator.Size = new System.Drawing.Size(1138, 804);
@@ -1646,7 +1646,7 @@
             this.panel3.Controls.Add(this.label68);
             this.panel3.Controls.Add(this.dataGridView7);
             this.panel3.Controls.Add(this.label69);
-            this.panel3.Location = new System.Drawing.Point(258, 0);
+            this.panel3.Location = new System.Drawing.Point(273, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1139, 804);
@@ -1740,15 +1740,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1397, 804);
+            this.ClientSize = new System.Drawing.Size(1409, 804);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.pnlInventoryMovements);
-            this.Controls.Add(this.pnlPriceCalculator);
             this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.pnlPOSTerminal);
             this.Controls.Add(this.pnlProducts);
             this.Controls.Add(this.pnlCategories);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.pnlInventoryMovements);
+            this.Controls.Add(this.pnlPriceCalculator);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmMain";
