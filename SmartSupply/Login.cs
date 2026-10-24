@@ -72,5 +72,10 @@ namespace SmartSupply
             Main.Show();
             Hide();
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
