@@ -12,15 +12,163 @@ using System.Windows.Forms;
 
 namespace SmartSupply
 {
-    public partial class frmMain : Form
+    public partial class  frmMain : Form
     {
+
         public frmMain()
         {
             InitializeComponent();
+            LoadProducts();
+        }
+        
+        private readonly string connectionString =
+    @"Server=LAPTOP-95CJ1ON6\SQLEXPRESS;Database=SmartSupplyDB;Integrated Security=True;";
+
+
+        private void LoadProductCombo()
+        {
+            try
+            {
+                using (SqlConnection conn =
+                    new SqlConnection(connectionString))
+                using (SqlDataAdapter da = new SqlDataAdapter(
+                    @"SELECT product_id, product_name
+              FROM products
+              ORDER BY product_name", conn))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    // Disconnect the event temporarily
+                    cboProductMarkUp.SelectedIndexChanged -=
+                        cmbProduct_SelectedIndexChanged;
+
+                    cboProductMarkUp.DataSource = null;
+
+                    cboProductMarkUp.DisplayMember = "product_name";
+                    cboProductMarkUp.ValueMember = "product_id";
+                    cboProductMarkUp.DataSource = dt;
+
+                    // Allow typing and autocomplete
+                    cboProductMarkUp.DropDownStyle =
+                        ComboBoxStyle.DropDown;
+
+                    cboProductMarkUp.AutoCompleteMode =
+                        AutoCompleteMode.SuggestAppend;
+
+                    cboProductMarkUp.AutoCompleteSource =
+                        AutoCompleteSource.ListItems;
+
+                    cboProductMarkUp.SelectedIndex = -1;
+                    cboProductMarkUp.Text = "";
+
+                    // Reconnect the event
+                    cboProductMarkUp.SelectedIndexChanged +=
+                        cmbProduct_SelectedIndexChanged;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error loading products: " + ex.Message);
+            }
+        }
+
+        private void cmbProduct_SelectedIndexChanged(
+    object sender, EventArgs e)
+        {
+            if (cboProductMarkUp.SelectedIndex >= 0 &&
+                cboProductMarkUp.SelectedValue != null &&
+                !(cboProductMarkUp.SelectedValue is DataRowView))
+            {
+                int productId = Convert.ToInt32(
+                    cboProductMarkUp.SelectedValue);
+
+                ShowProductDetails(productId);
+            }
+        }
+        
+
+        private void cmbProduct_KeyDown(
+    object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+
+                // Select the matching product from the list
+                int index = cboProductMarkUp.FindStringExact(
+                    cboProductMarkUp.Text.Trim());
+
+                if (index >= 0)
+                {
+                    cboProductMarkUp.SelectedIndex = index;
+                    cboProductMarkUp.DroppedDown = false;
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Please select a product from the list.");
+                }
+            }
+        }
+
+        private void ShowProductDetails(int productId)
+        {
+            try
+            {
+                using (SqlConnection conn =
+                    new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(
+                    @"SELECT product_name, unit_price, quantity
+              FROM products
+              WHERE product_id = @id", conn))
+                {
+                    cmd.Parameters.Add("@id", SqlDbType.Int).Value =
+                        productId;
+
+                    conn.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            cboProductMarkUp.Text =
+                                reader["product_name"].ToString();
+
+                            nudTotalCostMarkUp.Text =
+                                Convert.ToDecimal(
+                                    reader["unit_price"]).ToString("N2");
+
+                            nudQuantityMarkUp.Text =
+                                reader["quantity"].ToString();
+                        }
+                        else
+                        {
+                            ClearDescription();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error loading product details: " + ex.Message);
+            }
+        }
+
+        private void ClearDescription()
+        {
+            cboProductMarkUp.Text = "---------";
+            nudTotalCostMarkUp.Text = "---------";
+            nudQuantityMarkUp.Text = "---------";
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            LoadProducts();
+            ClearDescription();
+
             foreach (DataGridView grid in new[] { dataGridView1, dataGridView2, dataGridView3, dataGridView4, dataGridView5, dataGridView6 })
             {
                 grid.ReadOnly = true;
@@ -262,6 +410,11 @@ namespace SmartSupply
         }
 
         private void label55_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label21_Click(object sender, EventArgs e)
         {
 
         }

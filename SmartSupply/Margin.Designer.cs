@@ -34,8 +34,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,10 +41,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.smartpercentage = new System.Windows.Forms.NumericUpDown();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smartpercentage)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -111,24 +109,6 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Cost";
             // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(315, 179);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(65, 31);
-            this.button6.TabIndex = 25;
-            this.button6.Text = "50%";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(244, 179);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(65, 31);
-            this.button5.TabIndex = 24;
-            this.button5.Text = "40%";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(173, 179);
@@ -147,6 +127,7 @@
             this.button1.TabIndex = 20;
             this.button1.Text = "Calculate Result";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label3
             // 
@@ -199,24 +180,22 @@
             this.button2.Text = "10%";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown1
+            // smartpercentage
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(31, 139);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(536, 34);
-            this.numericUpDown1.TabIndex = 28;
+            this.smartpercentage.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.smartpercentage.Location = new System.Drawing.Point(31, 139);
+            this.smartpercentage.Name = "smartpercentage";
+            this.smartpercentage.Size = new System.Drawing.Size(536, 34);
+            this.smartpercentage.TabIndex = 28;
             // 
             // SmartMargin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 450);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.smartpercentage);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -231,7 +210,7 @@
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smartpercentage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,8 +223,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;
@@ -253,6 +230,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown smartpercentage;
     }
 }
