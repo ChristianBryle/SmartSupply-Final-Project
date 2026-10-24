@@ -12,23 +12,11 @@ using System.Windows.Forms;
 
 namespace SmartSupply
 {
-    public partial class  frmMain : Form
+    public partial class frmMain : Form
     {
-
-        public  frmMain()
+        public frmMain()
         {
             InitializeComponent();
-        }
-        
-        private void cmbProduct_SelectedIndexChanged( object sender, EventArgs e)
-        {
-            
-        }
-        
-
-        private void cmbProduct_KeyDown( object sender, KeyEventArgs e)
-        {
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -278,7 +266,12 @@ namespace SmartSupply
 
         }
 
-        private void label21_Click(object sender, EventArgs e)
+        private void label58_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label43_Click(object sender, EventArgs e)
         {
 
         }
