@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnQuatation = new System.Windows.Forms.Button();
             this.label57 = new System.Windows.Forms.Label();
             this.brtnPriceCalculator = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
@@ -70,6 +71,7 @@
             this.label43 = new System.Windows.Forms.Label();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.panel20 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
@@ -146,6 +148,13 @@
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label68 = new System.Windows.Forms.Label();
+            this.dataGridView7 = new System.Windows.Forms.DataGridView();
+            this.label69 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.pnlInventoryMovements.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -181,11 +190,15 @@
             this.panel12.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel14.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.panel1.Controls.Add(this.btnQuatation);
             this.panel1.Controls.Add(this.label57);
             this.panel1.Controls.Add(this.brtnPriceCalculator);
             this.panel1.Controls.Add(this.btnExit);
@@ -195,11 +208,27 @@
             this.panel1.Controls.Add(this.btnProduct);
             this.panel1.Controls.Add(this.btnDashboard);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(-3, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(204, 653);
             this.panel1.TabIndex = 0;
+            // 
+            // btnQuatation
+            // 
+            this.btnQuatation.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.btnQuatation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuatation.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuatation.ForeColor = System.Drawing.Color.White;
+            this.btnQuatation.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnQuatation.Location = new System.Drawing.Point(14, 345);
+            this.btnQuatation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnQuatation.Name = "btnQuatation";
+            this.btnQuatation.Size = new System.Drawing.Size(165, 36);
+            this.btnQuatation.TabIndex = 10;
+            this.btnQuatation.Text = "Quatation";
+            this.btnQuatation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnQuatation.UseVisualStyleBackColor = true;
             // 
             // label57
             // 
@@ -351,7 +380,7 @@
             this.pnlInventoryMovements.Controls.Add(this.btnStockOut);
             this.pnlInventoryMovements.Controls.Add(this.btnStockIn);
             this.pnlInventoryMovements.Controls.Add(this.label39);
-            this.pnlInventoryMovements.Location = new System.Drawing.Point(194, 0);
+            this.pnlInventoryMovements.Location = new System.Drawing.Point(205, 0);
             this.pnlInventoryMovements.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlInventoryMovements.Name = "pnlInventoryMovements";
             this.pnlInventoryMovements.Size = new System.Drawing.Size(854, 653);
@@ -441,7 +470,7 @@
             this.pnlCategories.Controls.Add(this.btnAddCategory);
             this.pnlCategories.Controls.Add(this.textBox1);
             this.pnlCategories.Controls.Add(this.label19);
-            this.pnlCategories.Location = new System.Drawing.Point(194, 0);
+            this.pnlCategories.Location = new System.Drawing.Point(205, 0);
             this.pnlCategories.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlCategories.Name = "pnlCategories";
             this.pnlCategories.Size = new System.Drawing.Size(854, 653);
@@ -541,7 +570,7 @@
             this.pnlProducts.Controls.Add(this.btnAddProduct);
             this.pnlProducts.Controls.Add(this.textBox2);
             this.pnlProducts.Controls.Add(this.label34);
-            this.pnlProducts.Location = new System.Drawing.Point(194, 0);
+            this.pnlProducts.Location = new System.Drawing.Point(205, 0);
             this.pnlProducts.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlProducts.Name = "pnlProducts";
             this.pnlProducts.Size = new System.Drawing.Size(854, 653);
@@ -666,7 +695,7 @@
             this.pnlPOSTerminal.Controls.Add(this.panel20);
             this.pnlPOSTerminal.Controls.Add(this.panel21);
             this.pnlPOSTerminal.Controls.Add(this.label36);
-            this.pnlPOSTerminal.Location = new System.Drawing.Point(194, 0);
+            this.pnlPOSTerminal.Location = new System.Drawing.Point(205, 0);
             this.pnlPOSTerminal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlPOSTerminal.Name = "pnlPOSTerminal";
             this.pnlPOSTerminal.Size = new System.Drawing.Size(854, 653);
@@ -682,7 +711,7 @@
             this.panel19.Location = new System.Drawing.Point(11, 95);
             this.panel19.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(487, 549);
+            this.panel19.Size = new System.Drawing.Size(420, 549);
             this.panel19.TabIndex = 40;
             // 
             // numericUpDown1
@@ -719,6 +748,7 @@
             this.label43.Size = new System.Drawing.Size(143, 25);
             this.label43.TabIndex = 31;
             this.label43.Text = "Select Products";
+            this.label43.Click += new System.EventHandler(this.label43_Click);
             // 
             // dataGridView5
             // 
@@ -729,12 +759,13 @@
             this.dataGridView5.Name = "dataGridView5";
             this.dataGridView5.RowHeadersWidth = 51;
             this.dataGridView5.RowTemplate.Height = 24;
-            this.dataGridView5.Size = new System.Drawing.Size(468, 437);
+            this.dataGridView5.Size = new System.Drawing.Size(399, 437);
             this.dataGridView5.TabIndex = 0;
             // 
             // panel20
             // 
             this.panel20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel20.Controls.Add(this.button3);
             this.panel20.Controls.Add(this.button11);
             this.panel20.Controls.Add(this.button12);
             this.panel20.Controls.Add(this.button13);
@@ -746,11 +777,25 @@
             this.panel20.Controls.Add(this.label41);
             this.panel20.Controls.Add(this.dataGridView4);
             this.panel20.Controls.Add(this.label42);
-            this.panel20.Location = new System.Drawing.Point(502, 95);
+            this.panel20.Location = new System.Drawing.Point(436, 95);
             this.panel20.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(346, 549);
+            this.panel20.Size = new System.Drawing.Size(412, 549);
             this.panel20.TabIndex = 41;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button3.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.Black;
+            this.button3.Location = new System.Drawing.Point(173, 505);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(123, 28);
+            this.button3.TabIndex = 43;
+            this.button3.Text = "Saved Quotation";
+            this.button3.UseVisualStyleBackColor = false;
             // 
             // button11
             // 
@@ -761,7 +806,7 @@
             this.button11.Location = new System.Drawing.Point(13, 505);
             this.button11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(99, 28);
+            this.button11.Size = new System.Drawing.Size(75, 28);
             this.button11.TabIndex = 42;
             this.button11.Text = "Clear Cart";
             this.button11.UseVisualStyleBackColor = false;
@@ -772,10 +817,10 @@
             this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button12.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button12.ForeColor = System.Drawing.Color.Black;
-            this.button12.Location = new System.Drawing.Point(124, 505);
+            this.button12.Location = new System.Drawing.Point(92, 505);
             this.button12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(99, 28);
+            this.button12.Size = new System.Drawing.Size(78, 28);
             this.button12.TabIndex = 41;
             this.button12.Text = "Remove";
             this.button12.UseVisualStyleBackColor = false;
@@ -786,7 +831,7 @@
             this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button13.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button13.ForeColor = System.Drawing.Color.White;
-            this.button13.Location = new System.Drawing.Point(237, 505);
+            this.button13.Location = new System.Drawing.Point(300, 505);
             this.button13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(99, 28);
@@ -798,21 +843,22 @@
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.ForeColor = System.Drawing.Color.Black;
-            this.label35.Location = new System.Drawing.Point(278, 475);
+            this.label35.ForeColor = System.Drawing.Color.Lime;
+            this.label35.Location = new System.Drawing.Point(339, 474);
             this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(59, 21);
             this.label35.TabIndex = 40;
             this.label35.Text = " ₱ 0.00";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(261, 445);
+            this.textBox3.Location = new System.Drawing.Point(223, 445);
             this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(76, 26);
+            this.textBox3.Size = new System.Drawing.Size(178, 26);
             this.textBox3.TabIndex = 39;
             // 
             // label37
@@ -820,7 +866,7 @@
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.Color.Black;
-            this.label37.Location = new System.Drawing.Point(262, 408);
+            this.label37.Location = new System.Drawing.Point(319, 408);
             this.label37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(78, 30);
@@ -873,7 +919,7 @@
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.RowHeadersWidth = 51;
             this.dataGridView4.RowTemplate.Height = 24;
-            this.dataGridView4.Size = new System.Drawing.Size(326, 352);
+            this.dataGridView4.Size = new System.Drawing.Size(391, 352);
             this.dataGridView4.TabIndex = 34;
             // 
             // label42
@@ -932,7 +978,7 @@
             this.pnlDashboard.Controls.Add(this.label56);
             this.pnlDashboard.Controls.Add(this.dataGridView6);
             this.pnlDashboard.Controls.Add(this.label53);
-            this.pnlDashboard.Location = new System.Drawing.Point(194, 0);
+            this.pnlDashboard.Location = new System.Drawing.Point(205, 0);
             this.pnlDashboard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlDashboard.Name = "pnlDashboard";
             this.pnlDashboard.Size = new System.Drawing.Size(854, 653);
@@ -1147,7 +1193,7 @@
             this.pnlPriceCalculator.Controls.Add(this.panel5);
             this.pnlPriceCalculator.Controls.Add(this.panel6);
             this.pnlPriceCalculator.Controls.Add(this.panel10);
-            this.pnlPriceCalculator.Location = new System.Drawing.Point(194, 0);
+            this.pnlPriceCalculator.Location = new System.Drawing.Point(205, 0);
             this.pnlPriceCalculator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlPriceCalculator.Name = "pnlPriceCalculator";
             this.pnlPriceCalculator.Size = new System.Drawing.Size(854, 654);
@@ -1664,18 +1710,106 @@
             this.label32.TabIndex = 18;
             this.label32.Text = "Total Cost";
             // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.panel9);
+            this.panel3.Controls.Add(this.label68);
+            this.panel3.Controls.Add(this.dataGridView7);
+            this.panel3.Controls.Add(this.label69);
+            this.panel3.Location = new System.Drawing.Point(205, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(854, 653);
+            this.panel3.TabIndex = 66;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(719, 91);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(125, 28);
+            this.button1.TabIndex = 60;
+            this.button1.Text = "View";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel9.Controls.Add(this.label58);
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(854, 79);
+            this.panel9.TabIndex = 39;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label58.ForeColor = System.Drawing.Color.Black;
+            this.label58.Location = new System.Drawing.Point(9, 20);
+            this.label58.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(146, 37);
+            this.label58.TabIndex = 30;
+            this.label58.Text = "Quatation";
+            this.label58.Click += new System.EventHandler(this.label58_Click);
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label68.ForeColor = System.Drawing.Color.Black;
+            this.label68.Location = new System.Drawing.Point(11, 93);
+            this.label68.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(154, 25);
+            this.label68.TabIndex = 44;
+            this.label68.Text = "Saved Quatation";
+            // 
+            // dataGridView7
+            // 
+            this.dataGridView7.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridView7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView7.Location = new System.Drawing.Point(16, 134);
+            this.dataGridView7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView7.Name = "dataGridView7";
+            this.dataGridView7.RowHeadersWidth = 51;
+            this.dataGridView7.RowTemplate.Height = 24;
+            this.dataGridView7.Size = new System.Drawing.Size(828, 510);
+            this.dataGridView7.TabIndex = 43;
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label69.Location = new System.Drawing.Point(217, 217);
+            this.label69.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(0, 21);
+            this.label69.TabIndex = 38;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1048, 653);
+            this.ClientSize = new System.Drawing.Size(1057, 653);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.pnlPOSTerminal);
             this.Controls.Add(this.pnlProducts);
             this.Controls.Add(this.pnlCategories);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnlInventoryMovements);
             this.Controls.Add(this.pnlPriceCalculator);
-            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmMain";
@@ -1742,6 +1876,11 @@
             this.panel13.PerformLayout();
             this.panel14.ResumeLayout(false);
             this.panel14.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1866,6 +2005,15 @@
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.DataGridView dataGridView6;
         private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Button btnQuatation;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.DataGridView dataGridView7;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button3;
     }
 }
 
