@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnQuatation = new System.Windows.Forms.Button();
             this.label57 = new System.Windows.Forms.Label();
             this.brtnPriceCalculator = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
@@ -70,6 +71,7 @@
             this.label43 = new System.Windows.Forms.Label();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.panel20 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
@@ -128,27 +130,13 @@
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.btnCalculateMargin = new System.Windows.Forms.ComboBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label58 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.label59 = new System.Windows.Forms.Label();
-            this.cboProductMargin = new System.Windows.Forms.ComboBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.nudTotalCostMargin = new System.Windows.Forms.NumericUpDown();
-            this.nudQuantityMargin = new System.Windows.Forms.NumericUpDown();
-            this.label60 = new System.Windows.Forms.Label();
-            this.label61 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lblProfitMarkUp = new System.Windows.Forms.Label();
-            this.lblUnitCostMarkUp = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.lblSellingPrice = new System.Windows.Forms.Label();
-            this.lblSuggestedPrice = new System.Windows.Forms.Label();
-            this.lblMarkUpUsed = new System.Windows.Forms.Label();
-            this.lblMarginUsed = new System.Windows.Forms.Label();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label68 = new System.Windows.Forms.Label();
+            this.dataGridView7 = new System.Windows.Forms.DataGridView();
+            this.label69 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.pnlInventoryMovements.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -180,13 +168,23 @@
             this.pnlPriceCalculator.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudTotalCostMargin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudQuantityMargin)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTotalCost)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).BeginInit();
+            this.panel10.SuspendLayout();
+            this.panel11.SuspendLayout();
+            this.panel12.SuspendLayout();
+            this.panel13.SuspendLayout();
+            this.panel14.SuspendLayout();
+            this.panel3.SuspendLayout();  
+            this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.panel1.Controls.Add(this.btnQuatation);
             this.panel1.Controls.Add(this.label57);
             this.panel1.Controls.Add(this.brtnPriceCalculator);
             this.panel1.Controls.Add(this.btnExit);
@@ -198,9 +196,27 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(-4, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(272, 804);
             this.panel1.TabIndex = 0;
+            // 
+            // btnQuatation
+            // 
+            this.btnQuatation.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.btnQuatation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuatation.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuatation.ForeColor = System.Drawing.Color.White;
+            this.btnQuatation.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnQuatation.Location = new System.Drawing.Point(14, 345);
+            this.btnQuatation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnQuatation.Name = "btnQuatation";
+            this.btnQuatation.Size = new System.Drawing.Size(165, 36);
+            this.btnQuatation.TabIndex = 10;
+            this.btnQuatation.Text = "Quatation";
+            this.btnQuatation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnQuatation.UseVisualStyleBackColor = true;
             // 
             // label57
             // 
@@ -352,6 +368,8 @@
             this.pnlInventoryMovements.Controls.Add(this.label39);
             this.pnlInventoryMovements.Location = new System.Drawing.Point(259, 0);
             this.pnlInventoryMovements.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlInventoryMovements.Location = new System.Drawing.Point(205, 0);
+            this.pnlInventoryMovements.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlInventoryMovements.Name = "pnlInventoryMovements";
             this.pnlInventoryMovements.Size = new System.Drawing.Size(1139, 804);
             this.pnlInventoryMovements.TabIndex = 43;
@@ -440,6 +458,8 @@
             this.pnlCategories.Controls.Add(this.label19);
             this.pnlCategories.Location = new System.Drawing.Point(259, 0);
             this.pnlCategories.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlCategories.Location = new System.Drawing.Point(205, 0);
+            this.pnlCategories.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlCategories.Name = "pnlCategories";
             this.pnlCategories.Size = new System.Drawing.Size(1139, 804);
             this.pnlCategories.TabIndex = 62;
@@ -538,6 +558,8 @@
             this.pnlProducts.Controls.Add(this.label34);
             this.pnlProducts.Location = new System.Drawing.Point(259, 0);
             this.pnlProducts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlProducts.Location = new System.Drawing.Point(205, 0);
+            this.pnlProducts.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlProducts.Name = "pnlProducts";
             this.pnlProducts.Size = new System.Drawing.Size(1139, 804);
             this.pnlProducts.TabIndex = 63;
@@ -711,6 +733,7 @@
             this.label43.Size = new System.Drawing.Size(174, 31);
             this.label43.TabIndex = 31;
             this.label43.Text = "Select Products";
+            this.label43.Click += new System.EventHandler(this.label43_Click);
             // 
             // dataGridView5
             // 
@@ -727,6 +750,7 @@
             // panel20
             // 
             this.panel20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel20.Controls.Add(this.button3);
             this.panel20.Controls.Add(this.button11);
             this.panel20.Controls.Add(this.button12);
             this.panel20.Controls.Add(this.button13);
@@ -743,6 +767,20 @@
             this.panel20.Name = "panel20";
             this.panel20.Size = new System.Drawing.Size(461, 675);
             this.panel20.TabIndex = 41;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button3.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.Black;
+            this.button3.Location = new System.Drawing.Point(173, 505);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(123, 28);
+            this.button3.TabIndex = 43;
+            this.button3.Text = "Saved Quotation";
+            this.button3.UseVisualStyleBackColor = false;
             // 
             // button11
             // 
@@ -796,6 +834,7 @@
             this.label35.Size = new System.Drawing.Size(78, 28);
             this.label35.TabIndex = 40;
             this.label35.Text = " ₱ 0.00";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // textBox3
             // 
@@ -1143,6 +1182,18 @@
             this.markuppanel.TabIndex = 40;
             // 
             // panel2
+            this.pnlPriceCalculator.BackColor = System.Drawing.Color.White;
+            this.pnlPriceCalculator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlPriceCalculator.Controls.Add(this.panel4);
+            this.pnlPriceCalculator.Controls.Add(this.label7);
+            this.pnlPriceCalculator.Controls.Add(this.panel5);
+            this.pnlPriceCalculator.Controls.Add(this.panel6);
+            this.pnlPriceCalculator.Controls.Add(this.panel10);
+            this.pnlPriceCalculator.Location = new System.Drawing.Point(205, 0);
+            this.pnlPriceCalculator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlPriceCalculator.Name = "pnlPriceCalculator";
+            this.pnlPriceCalculator.Size = new System.Drawing.Size(854, 654);
+            this.pnlPriceCalculator.TabIndex = 2;
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1650,6 +1701,93 @@
             this.lblMarginUsed.TabIndex = 60;
             this.lblMarginUsed.Text = "----";
             // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.panel9);
+            this.panel3.Controls.Add(this.label68);
+            this.panel3.Controls.Add(this.dataGridView7);
+            this.panel3.Controls.Add(this.label69);
+            this.panel3.Location = new System.Drawing.Point(205, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(854, 653);
+            this.panel3.TabIndex = 66;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(719, 91);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(125, 28);
+            this.button1.TabIndex = 60;
+            this.button1.Text = "View";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel9.Controls.Add(this.label58);
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(854, 79);
+            this.panel9.TabIndex = 39;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label58.ForeColor = System.Drawing.Color.Black;
+            this.label58.Location = new System.Drawing.Point(9, 20);
+            this.label58.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(146, 37);
+            this.label58.TabIndex = 30;
+            this.label58.Text = "Quatation";
+            this.label58.Click += new System.EventHandler(this.label58_Click);
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label68.ForeColor = System.Drawing.Color.Black;
+            this.label68.Location = new System.Drawing.Point(11, 93);
+            this.label68.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(154, 25);
+            this.label68.TabIndex = 44;
+            this.label68.Text = "Saved Quatation";
+            // 
+            // dataGridView7
+            // 
+            this.dataGridView7.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridView7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView7.Location = new System.Drawing.Point(16, 134);
+            this.dataGridView7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView7.Name = "dataGridView7";
+            this.dataGridView7.RowHeadersWidth = 51;
+            this.dataGridView7.RowTemplate.Height = 24;
+            this.dataGridView7.Size = new System.Drawing.Size(828, 510);
+            this.dataGridView7.TabIndex = 43;
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label69.Location = new System.Drawing.Point(217, 217);
+            this.label69.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(0, 21);
+            this.label69.TabIndex = 38;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1661,7 +1799,9 @@
             this.Controls.Add(this.pnlPOSTerminal);
             this.Controls.Add(this.pnlProducts);
             this.Controls.Add(this.pnlCategories);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnlInventoryMovements);
+            this.Controls.Add(this.pnlPriceCalculator);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmMain";
@@ -1722,6 +1862,25 @@
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTotalCostMargin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantityMargin)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTotalCost)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).EndInit();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
+            this.panel14.ResumeLayout(false);
+            this.panel14.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1802,53 +1961,15 @@
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.DataGridView dataGridView6;
         private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Panel markuppanel;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnCalculateMarkUp;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ComboBox cboProductMarkUp;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.NumericUpDown nudTotalCostMarkUp;
-        private System.Windows.Forms.NumericUpDown nudQuantityMarkUp;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel pnlPriceCalculator;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cboMarkUpPercent;
+        private System.Windows.Forms.Button btnQuatation;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label lblProfitMargin;
-        private System.Windows.Forms.Label lblUnitCostMargin;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.ComboBox btnCalculateMargin;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.DataGridView dataGridView7;
+        private System.Windows.Forms.Label label69;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label59;
-        private System.Windows.Forms.ComboBox cboProductMargin;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.NumericUpDown nudTotalCostMargin;
-        private System.Windows.Forms.NumericUpDown nudQuantityMargin;
-        private System.Windows.Forms.Label label60;
-        private System.Windows.Forms.Label label61;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label lblProfitMarkUp;
-        private System.Windows.Forms.Label lblUnitCostMarkUp;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label lblSellingPrice;
-        private System.Windows.Forms.Label lblSuggestedPrice;
-        private System.Windows.Forms.Label lblMarkUpUsed;
-        private System.Windows.Forms.Label lblMarginUsed;
+        private System.Windows.Forms.Button button3;
     }
 }
 
