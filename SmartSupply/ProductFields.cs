@@ -11,7 +11,8 @@ namespace SmartSupply
             category.ValueMember = "category_id";
             category.DataSource = DBconnection.Query("SELECT category_id, category_name FROM categories ORDER BY category_name");
 
-            stock.Maximum = 1000000;
+            if (stock != null)
+                stock.Maximum = 1000000;
             reorder.Maximum = 1000000;
             price.Maximum = 99999999;
             price.DecimalPlaces = 2;
