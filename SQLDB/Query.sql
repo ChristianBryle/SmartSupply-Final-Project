@@ -73,3 +73,29 @@ CREATE TABLE users (
 -- Username: user Password: user
 INSERT INTO users (username, password_hash)
 VALUES ('user', LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', 'user'), 2)));
+CREATE TABLE sales (
+    sale_id        INT IDENTITY(1,1) PRIMARY KEY,
+    sale_number    AS ('OR-' + RIGHT('000000' + CAST(sale_id AS VARCHAR(10)), 6)) PERSISTED,
+    sale_date      DATETIME NOT NULL DEFAULT GETDATE(),
+    total_amount   DECIMAL(12,2) NOT NULL,
+    cash_received  DECIMAL(12,2) NOT NULL,
+    change_amount  DECIMAL(12,2) NOT NULL,
+    created_by     INT NOT NULL,
+    receipt_path   VARCHAR(400),
+
+    FOREIGN KEY (created_by) REFERENCES users(user_id)
+);
+GO
+
+CREATE TABLE sale_items (
+    sale_item_id   INT IDENTITY(1,1) PRIMARY KEY,
+    sale_id        INT NOT NULL,
+    product_id     INT NOT NULL,
+    quantity       INT NOT NULL CHECK (quantity > 0),
+    unit_price     DECIMAL(10,2) NOT NULL,
+    total_price    AS (quantity * unit_price) PERSISTED,
+
+    FOREIGN KEY (sale_id) REFERENCES sales(sale_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+GO
