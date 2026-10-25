@@ -49,6 +49,8 @@ namespace SmartSupply
             btnView.Click += btnSaveQuotation_Click;
             button1.Click += btnViewQuotation_Click;
             btnDelete.Click += btnDeleteQuotation_Click;
+            button13.Click += btnCompleteSale_Click;
+            textBox3.TextChanged += (s, args) => UpdateChange();
 
             InitCart();
             RefreshAll();
@@ -134,6 +136,7 @@ namespace SmartSupply
         {
             label47.Text = Convert.ToInt32(DBconnection.Scalar("SELECT COUNT(*) FROM products")).ToString();
             label50.Text = Convert.ToInt32(DBconnection.Scalar("SELECT COUNT(*) FROM products WHERE quantity <= reorder_level")).ToString();
+            label54.Text = Convert.ToInt32(DBconnection.Scalar("SELECT COUNT(*) FROM sales")).ToString();
 
             dataGridView6.DataSource = DBconnection.Query(
                 "SELECT p.product_name AS [Product], c.category_name AS [Category], " +
@@ -187,6 +190,19 @@ namespace SmartSupply
         {
             decimal total = cart.AsEnumerable().Sum(r => r.Field<decimal>("Price") * r.Field<int>("Qty"));
             label37.Text = "\u20B1 " + total.ToString("N2");
+            UpdateChange();
+        }
+
+        private decimal CartTotal()
+        {
+            return cart.AsEnumerable().Sum(r => r.Field<decimal>("Price") * r.Field<int>("Qty"));
+        }
+
+        private void UpdateChange()
+        {
+            decimal cash;
+            decimal change = decimal.TryParse(textBox3.Text.Trim(), out cash) ? cash - CartTotal() : 0m;
+            label35.Text = "\u20B1 " + Math.Max(0m, change).ToString("N2");
         }
 
         private void btnRemoveFromCart_Click(object sender, EventArgs e)
@@ -227,7 +243,7 @@ namespace SmartSupply
                 return;
 
             DBconnection.Execute(
-                "DELETE FROM Transactions_log WHERE product_id = @id; DELETE FROM products WHERE product_id = @id;",
+                "DELETE FROM Transactions_log WHERE product_id = @id; DELETE FROM sale_items WHERE product_id = @id; DELETE FROM products WHERE product_id = @id;",
                 new SqlParameter("@id", id.Value));
             RefreshAll();
         }
@@ -479,6 +495,116 @@ namespace SmartSupply
             {
                 MessageBox.Show("Database error.\n" + ex.Message, "SmartSupply", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnCompleteSale_Click(object sender, EventArgs e)
+        {
+            if (cart.Rows.Count == 0)
+            {
+                MessageBox.Show("The cart is empty.", "POS Terminal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            decimal total = CartTotal();
+            decimal cash;
+            if (!decimal.TryParse(textBox3.Text.Trim(), out cash) || cash < total)
+            {
+                MessageBox.Show($"Cash received must be at least \u20B1 {total:N2}.", "POS Terminal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBox3.Focus();
+                return;
+            }
+            decimal change = cash - total;
+
+            string saleNumber;
+            DateTime saleDate;
+            int saleId;
+            try
+            {
+                using (SqlConnection conn = DBconnection.Open())
+                using (SqlTransaction tx = conn.BeginTransaction())
+                {
+                    using (SqlCommand cmd = new SqlCommand(
+                        "INSERT INTO sales (total_amount, cash_received, change_amount, created_by) VALUES (@total, @cash, @change, @user); " +
+                        "SELECT CAST(SCOPE_IDENTITY() AS INT);", conn, tx))
+                    {
+                        cmd.Parameters.AddWithValue("@total", total);
+                        cmd.Parameters.AddWithValue("@cash", cash);
+                        cmd.Parameters.AddWithValue("@change", change);
+                        cmd.Parameters.AddWithValue("@user", currentUserId);
+                        saleId = (int)cmd.ExecuteScalar();
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT sale_number, sale_date FROM sales WHERE sale_id = @id", conn, tx))
+                    {
+                        cmd.Parameters.AddWithValue("@id", saleId);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            reader.Read();
+                            saleNumber = reader.GetString(0);
+                            saleDate = reader.GetDateTime(1);
+                        }
+                    }
+
+                    foreach (DataRow r in cart.Rows)
+                    {
+                        int productId = r.Field<int>("ID");
+                        int qty = r.Field<int>("Qty");
+
+                        using (SqlCommand cmd = new SqlCommand(
+                            "UPDATE products SET quantity = quantity - @qty WHERE product_id = @pid AND quantity >= @qty", conn, tx))
+                        {
+                            cmd.Parameters.AddWithValue("@qty", qty);
+                            cmd.Parameters.AddWithValue("@pid", productId);
+                            if (cmd.ExecuteNonQuery() == 0)
+                            {
+                                tx.Rollback();
+                                MessageBox.Show($"Not enough stock for {r.Field<string>("Product")}. Sale cancelled.", "POS Terminal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                RefreshAll();
+                                return;
+                            }
+                        }
+
+                        using (SqlCommand cmd = new SqlCommand(
+                            "INSERT INTO sale_items (sale_id, product_id, quantity, unit_price) VALUES (@sid, @pid, @qty, @price); " +
+                            "INSERT INTO Transactions_log (product_id, transaction_type, quantity, remarks) VALUES (@pid, 'Stock Out', @qty, @remarks);", conn, tx))
+                        {
+                            cmd.Parameters.AddWithValue("@sid", saleId);
+                            cmd.Parameters.AddWithValue("@pid", productId);
+                            cmd.Parameters.AddWithValue("@qty", qty);
+                            cmd.Parameters.AddWithValue("@price", r.Field<decimal>("Price"));
+                            cmd.Parameters.AddWithValue("@remarks", "POS Sale " + saleNumber);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    tx.Commit();
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Database error.\n" + ex.Message, "SmartSupply", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string receiptPath = null;
+            try
+            {
+                receiptPath = ReceiptPdf.Save(saleNumber, saleDate, cart, total, cash, change);
+                DBconnection.Execute("UPDATE sales SET receipt_path = @path WHERE sale_id = @id",
+                    new SqlParameter("@path", receiptPath), new SqlParameter("@id", saleId));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Sale saved, but the receipt PDF could not be created.\n" + ex.Message, "POS Terminal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (receiptPath != null)
+                MessageBox.Show($"Sale {saleNumber} completed.\nChange: \u20B1 {change:N2}\nReceipt saved to:\n{receiptPath}", "POS Terminal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            cart.Rows.Clear();
+            textBox3.Clear();
+            UpdateCartTotal();
+            RefreshAll();
         }
 
         private void btnSaveQuotation_Click(object sender, EventArgs e)

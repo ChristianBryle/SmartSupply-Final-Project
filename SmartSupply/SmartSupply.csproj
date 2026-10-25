@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="PDFsharp" Version="1.50.5147" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="AddProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +88,7 @@
     <Compile Include="Quotation-Name.Designer.cs">
       <DependentUpon>Quotation-Name.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReceiptPdf.cs" />
     <Compile Include="StockMovement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

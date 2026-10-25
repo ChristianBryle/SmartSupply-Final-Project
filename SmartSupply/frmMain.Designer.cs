@@ -151,13 +151,13 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.pnlQuotation = new System.Windows.Forms.Panel();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label58 = new System.Windows.Forms.Label();
             this.label68 = new System.Windows.Forms.Label();
             this.dataGridView7 = new System.Windows.Forms.DataGridView();
             this.label69 = new System.Windows.Forms.Label();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlInventoryMovements.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -467,11 +467,11 @@
             // 
             this.pnlCategories.BackColor = System.Drawing.Color.White;
             this.pnlCategories.Controls.Add(this.panel15);
-            this.pnlCategories.Controls.Add(this.dataGridView2);
             this.pnlCategories.Controls.Add(this.button2);
             this.pnlCategories.Controls.Add(this.btnAddCategory);
             this.pnlCategories.Controls.Add(this.textBox1);
             this.pnlCategories.Controls.Add(this.label19);
+            this.pnlCategories.Controls.Add(this.dataGridView2);
             this.pnlCategories.Location = new System.Drawing.Point(205, 0);
             this.pnlCategories.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCategories.Name = "pnlCategories";
@@ -978,7 +978,7 @@
             this.pnlDashboard.Controls.Add(this.label56);
             this.pnlDashboard.Controls.Add(this.dataGridView6);
             this.pnlDashboard.Controls.Add(this.label53);
-            this.pnlDashboard.Location = new System.Drawing.Point(205, 0);
+            this.pnlDashboard.Location = new System.Drawing.Point(207, 0);
             this.pnlDashboard.Margin = new System.Windows.Forms.Padding(2);
             this.pnlDashboard.Name = "pnlDashboard";
             this.pnlDashboard.Size = new System.Drawing.Size(854, 653);
@@ -1756,6 +1756,20 @@
             this.pnlQuotation.Size = new System.Drawing.Size(854, 653);
             this.pnlQuotation.TabIndex = 66;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.White;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.ForeColor = System.Drawing.Color.Black;
+            this.btnDelete.Location = new System.Drawing.Point(590, 91);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(125, 28);
+            this.btnDelete.TabIndex = 61;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.DodgerBlue;
@@ -1829,33 +1843,19 @@
             this.label69.Size = new System.Drawing.Size(0, 21);
             this.label69.TabIndex = 38;
             // 
-            // btnDelete
-            // 
-            this.btnDelete.BackColor = System.Drawing.Color.White;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.ForeColor = System.Drawing.Color.Black;
-            this.btnDelete.Location = new System.Drawing.Point(590, 91);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(125, 28);
-            this.btnDelete.TabIndex = 61;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = false;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 653);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pnlQuotation);
-            this.Controls.Add(this.pnlInventoryMovements);
-            this.Controls.Add(this.pnlPriceCalculator);
             this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.pnlPOSTerminal);
             this.Controls.Add(this.pnlProducts);
             this.Controls.Add(this.pnlCategories);
+            this.Controls.Add(this.pnlQuotation);
+            this.Controls.Add(this.pnlInventoryMovements);
+            this.Controls.Add(this.pnlPriceCalculator);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMain";
