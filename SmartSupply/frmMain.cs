@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,10 @@ namespace SmartSupply
     public partial class frmMain : Form
     {
         private readonly int currentUserId;
+        private DataTable _markupProducts;
+        private DataTable _marginProducts;
+        private bool _loadingProducts = false;
+
         private int? viewingQuotationId;
 
         public frmMain() : this(1)
@@ -25,6 +31,8 @@ namespace SmartSupply
         {
             InitializeComponent();
             currentUserId = userId;
+
+            InitializePriceCalculator();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -55,6 +63,362 @@ namespace SmartSupply
             InitCart();
             RefreshAll();
         }
+        private void InitializePriceCalculator()
+        {
+            ConfigureSearchCombo(cboProductMarkUp);
+            ConfigureSearchCombo(cboProductMargin);
+
+            ConfigureNumeric(nudQuantityMarkUp, 0);
+            ConfigureNumeric(nudQuantityMargin, 0);
+            ConfigureNumeric(nudTotalCostMarkUp, 2);
+            ConfigureNumeric(nudTotalCostMargin, 2);
+            ConfigurePercentCombo(cboMarkUpPercent);
+            ConfigurePercentCombo(btnCalculateMargin);
+
+            nudQuantityMarkUp.ReadOnly = true;
+            nudQuantityMarkUp.Increment = 0;
+            nudQuantityMarkUp.TabStop = false;
+
+            cboProductMarkUp.SelectedIndexChanged -= cboProductMarkUp_Changed;
+            cboProductMarkUp.SelectedIndexChanged += cboProductMarkUp_Changed;
+            cboProductMarkUp.TextChanged -= cboProductMarkUp_Changed;
+            cboProductMarkUp.TextChanged += cboProductMarkUp_Changed;
+
+            cboProductMargin.SelectedIndexChanged -= cboProductMargin_Changed;
+            cboProductMargin.SelectedIndexChanged += cboProductMargin_Changed;
+            cboProductMargin.TextChanged -= cboProductMargin_Changed;
+            cboProductMargin.TextChanged += cboProductMargin_Changed    ;
+
+            nudTotalCostMarkUp.ValueChanged -= MarkupInput_Changed;
+            nudTotalCostMarkUp.ValueChanged += MarkupInput_Changed;
+            nudQuantityMarkUp.ValueChanged -= MarkupInput_Changed;
+            nudQuantityMarkUp.ValueChanged += MarkupInput_Changed;
+            cboMarkUpPercent.SelectedIndexChanged -= MarkupInput_Changed;
+            cboMarkUpPercent.SelectedIndexChanged += MarkupInput_Changed;
+
+            nudTotalCostMargin.ValueChanged -= MarginInput_Changed;
+            nudTotalCostMargin.ValueChanged += MarginInput_Changed;
+            nudQuantityMargin.ValueChanged -= MarginInput_Changed;
+            nudQuantityMargin.ValueChanged += MarginInput_Changed;
+            btnCalculateMargin.SelectedIndexChanged -= MarginInput_Changed;
+            btnCalculateMargin.SelectedIndexChanged += MarginInput_Changed;
+
+            btnCalculateMarkUp.Click -= btnCalculateMarkUp_Click;
+            btnCalculateMarkUp.Click += btnCalculateMarkUp_Click;
+            smartmarginbutton.Click -= btnCalculateMargin_Click;
+            smartmarginbutton.Click += btnCalculateMargin_Click;
+
+            LoadPriceProducts();
+            ResetMarkupResults();
+            ResetMarginResults();
+        }
+
+        private void cboProductMarkUp_Changed(object sender, EventArgs e)
+        {
+            if (_loadingProducts) return;
+            ResetMarkupResults();
+
+            DataRow row = FindProductRow(_markupProducts, cboProductMarkUp.Text);
+            if (row != null)
+            {
+                decimal stock = Convert.ToDecimal(row["quantity"]);
+                nudQuantityMarkUp.Value = Math.Max(nudQuantityMarkUp.Minimum,
+                                          Math.Min(stock, nudQuantityMarkUp.Maximum));
+            }
+            else
+            {
+                nudQuantityMarkUp.Value = 0;
+            }
+        }
+
+        private void cboProductMargin_Changed(object sender, EventArgs e)
+        {
+            if (_loadingProducts) return;
+            ResetMarginResults();
+        }
+
+        private void MarkupInput_Changed(object sender, EventArgs e)
+        {
+            if (_loadingProducts) return;
+            ResetMarkupResults();
+        }
+
+        private void MarginInput_Changed(object sender, EventArgs e)
+        {
+            if (_loadingProducts) return;
+            ResetMarginResults();
+        }
+
+        // ---------- MARKUP ----------
+
+        private void btnCalculateMarkUp_Click(object sender, EventArgs e)
+        {
+            DataRow row = FindProductRow(_markupProducts, cboProductMarkUp.Text);
+            if (row == null)
+            {
+                ShowInputError("Please select a product from the list.");
+                return;
+            }
+
+            int productId = Convert.ToInt32(row["product_id"]);
+            decimal quantity = Convert.ToDecimal(row["quantity"]);
+            decimal totalCost = nudTotalCostMarkUp.Value;
+
+            if (quantity <= 0)
+            {
+                ShowInputError("This product has no available stock, so unit cost cannot be computed.");
+                return;
+            }
+            if (totalCost <= 0)
+            {
+                ShowInputError("Please enter a total cost greater than zero.");
+                return;
+            }
+
+            decimal markup;
+            if (string.IsNullOrWhiteSpace(cboMarkUpPercent.Text) || !TryGetPercent(cboMarkUpPercent, out markup))
+            {
+                ShowInputError("Please select a valid markup percentage.");
+                return;
+            }
+            if (markup < 0m)
+            {
+                ShowInputError("Markup percentage cannot be negative.");
+                return;
+            }
+
+            decimal unitCost = totalCost / quantity;
+            decimal sellingPrice = Math.Round(unitCost * (1m + markup), 2, MidpointRounding.AwayFromZero);
+            decimal profit = Math.Round(sellingPrice - unitCost, 2, MidpointRounding.AwayFromZero);
+            unitCost = Math.Round(unitCost, 2, MidpointRounding.AwayFromZero);
+
+            if (!UpdateProductPrice(productId, sellingPrice)) return;
+
+            RefreshProductsAfterUpdate();
+
+            lblSellingPrice.Text = Peso(sellingPrice);
+            lblUnitCostMarkUp.Text = Peso(unitCost);
+            lblProfitMarkUp.Text = Peso(profit);
+        }
+
+        // ---------- SMART MARGIN ----------
+
+        private void btnCalculateMargin_Click(object sender, EventArgs e)
+        {
+            DataRow row = FindProductRow(_marginProducts, cboProductMargin.Text);
+            if (row == null)
+            {
+                ShowInputError("Please select a product from the list.");
+                return;
+            }
+
+            int productId = Convert.ToInt32(row["product_id"]);
+            decimal quantity = nudQuantityMargin.Value;
+            decimal totalCost = nudTotalCostMargin.Value;
+
+            if (quantity <= 0)
+            {
+                ShowInputError("Please enter a quantity greater than zero.");
+                return;
+            }
+            if (totalCost <= 0)
+            {
+                ShowInputError("Please enter a total cost greater than zero.");
+                return;
+            }
+
+            decimal margin;
+            if (string.IsNullOrWhiteSpace(btnCalculateMargin.Text) || !TryGetPercent(btnCalculateMargin, out margin))
+            {
+                ShowInputError("Please select a valid margin percentage.");
+                return;
+            }
+            if (margin < 0m || margin >= 1m)
+            {
+                ShowInputError("Margin percentage must be at least 0% and less than 100%.");
+                return;
+            }
+
+            decimal unitCost = totalCost / quantity;
+            decimal sellingPrice = Math.Round(unitCost / (1m - margin), 2, MidpointRounding.AwayFromZero);
+            decimal profit = Math.Round(sellingPrice - unitCost, 2, MidpointRounding.AwayFromZero);
+            unitCost = Math.Round(unitCost, 2, MidpointRounding.AwayFromZero);
+
+            if (!UpdateProductPrice(productId, sellingPrice)) return;
+
+            RefreshProductsAfterUpdate();
+
+            lblSuggestedPrice.Text = Peso(sellingPrice);
+            lblUnitCostMargin.Text = Peso(unitCost);
+            lblProfitMargin.Text = Peso(profit);
+        }
+
+        private void RefreshProductsAfterUpdate()
+        {
+            DataRow markupRow = FindProductRow(_markupProducts, cboProductMarkUp.Text);
+            DataRow marginRow = FindProductRow(_marginProducts, cboProductMargin.Text);
+            object markupId = markupRow != null ? markupRow["product_id"] : null;
+            object marginId = marginRow != null ? marginRow["product_id"] : null;
+
+            LoadPriceProducts();
+
+            _loadingProducts = true;
+            try
+            {
+                if (markupId != null)
+                {
+                    cboProductMarkUp.SelectedValue = markupId;
+                    DataRow r = FindProductRow(_markupProducts, cboProductMarkUp.Text);
+                    if (r != null)
+                        nudQuantityMarkUp.Value = Math.Min(Convert.ToDecimal(r["quantity"]), nudQuantityMarkUp.Maximum);
+                }
+                if (marginId != null)
+                {
+                    cboProductMargin.SelectedValue = marginId;
+                }
+            }
+            finally
+            {
+                _loadingProducts = false;
+            }
+        }
+
+        // Separate tables for each dropdown
+        private void LoadPriceProducts()
+        {
+            _loadingProducts = true;
+
+            try
+            {
+                _markupProducts = GetProductsTable();
+                _marginProducts = GetProductsTable();
+
+                BindCombo(cboProductMarkUp, _markupProducts);
+                BindCombo(cboProductMargin, _marginProducts);
+            }
+            finally
+            {
+                _loadingProducts = false;
+            }
+        }
+
+        private void BindCombo(ComboBox cbo, DataTable table)
+        {
+            cbo.DataSource = null;
+            cbo.DisplayMember = "product_name";
+            cbo.ValueMember = "product_id";
+            cbo.DataSource = table;
+            cbo.SelectedIndex = -1;
+
+            ConfigureSearchCombo(cbo);
+        }
+
+        private static void ConfigureSearchCombo(ComboBox combo)
+        {
+            combo.DropDownStyle = ComboBoxStyle.DropDown;
+            combo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            combo.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private static void ConfigurePercentCombo(ComboBox combo)
+        {
+            combo.Items.Clear();
+            for (int percent = 0; percent <= 90; percent += 5)
+                combo.Items.Add(percent.ToString(CultureInfo.InvariantCulture) + "%");
+
+            combo.DropDownStyle = ComboBoxStyle.DropDownList;
+            combo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            combo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            combo.SelectedIndex = -1;
+        }
+
+        private static void ConfigureNumeric(NumericUpDown numeric, int decimalPlaces)
+        {
+            numeric.Minimum = 0;
+            numeric.Maximum = 1000000000;
+            numeric.DecimalPlaces = decimalPlaces;
+            numeric.ThousandsSeparator = true;
+        }
+
+        private static DataRow FindProductRow(DataTable products, string productName)
+        {
+            if (products == null || string.IsNullOrWhiteSpace(productName))
+                return null;
+
+            foreach (DataRow row in products.Rows)
+            {
+                if (string.Equals(Convert.ToString(row["product_name"]), productName.Trim(), StringComparison.OrdinalIgnoreCase))
+                    return row;
+            }
+
+            return null;
+        }
+
+        private static DataTable GetProductsTable()
+        {
+            return DBconnection.Query(
+                "SELECT product_id, product_name, quantity, unit_price FROM products ORDER BY product_name");
+        }
+
+        private static bool TryGetPercent(ComboBox combo, out decimal percent)
+        {
+            percent = 0m;
+            string value = (combo.Text ?? string.Empty).Trim().TrimEnd('%').Trim();
+            decimal numericValue;
+
+            if (!decimal.TryParse(value, NumberStyles.Number, CultureInfo.CurrentCulture, out numericValue))
+                return false;
+
+            percent = numericValue / 100m;
+            return true;
+        }
+
+        private bool UpdateProductPrice(int productId, decimal sellingPrice)
+        {
+            try
+            {
+                DBconnection.Execute(
+                    "UPDATE products SET unit_price = @price WHERE product_id = @id",
+                    new SqlParameter("@price", sellingPrice),
+                    new SqlParameter("@id", productId));
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Failed to update the product price.\n" + ex.Message,
+                    "Price Calculator", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private void ResetMarkupResults()
+        {
+            lblSellingPrice.Text = Peso(0m);
+            lblUnitCostMarkUp.Text = Peso(0m);
+            lblProfitMarkUp.Text = Peso(0m);
+            lblMarkUpUsed.Text = "----";
+        }
+
+        private void ResetMarginResults()
+        {
+            lblSuggestedPrice.Text = Peso(0m);
+            lblUnitCostMargin.Text = Peso(0m);
+            lblProfitMargin.Text = Peso(0m);
+            lblMarginUsed.Text = "----";
+        }
+
+        private static string Peso(decimal value)
+        {
+            return "₱ " + value.ToString("N2", CultureInfo.InvariantCulture);
+        }
+
+        private static void ShowInputError(string message)
+        {
+            MessageBox.Show(message, "Price Calculator", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+
+
 
         private readonly DataTable cart = new DataTable();
 
@@ -666,6 +1030,31 @@ namespace SmartSupply
             {
                 MessageBox.Show("Database error.\n" + ex.Message, "SmartSupply", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCalculateMarkUp_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MarkUpPercent_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void cboMarkUpPercent_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label59_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
