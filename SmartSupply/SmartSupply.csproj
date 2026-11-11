@@ -82,12 +82,19 @@
       <DependentUpon>MarkUp.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductFields.cs" />
+    <Compile Include="Qoutation_items.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Qoutation_items.Designer.cs">
+      <DependentUpon>Qoutation_items.cs</DependentUpon>
+    </Compile>
     <Compile Include="Quotation-Name.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Quotation-Name.Designer.cs">
       <DependentUpon>Quotation-Name.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuotationPdf.cs" />
     <Compile Include="ReceiptPdf.cs" />
     <Compile Include="StockMovement.cs" />
     <Compile Include="Program.cs" />
@@ -136,6 +143,9 @@
     </Compile>
     <EmbeddedResource Include="Margin.resx">
       <DependentUpon>Margin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Qoutation_items.resx">
+      <DependentUpon>Qoutation_items.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quotation-Name.resx">
       <DependentUpon>Quotation-Name.cs</DependentUpon>

@@ -4,18 +4,16 @@ namespace SmartSupply
 {
     internal static class ProductFields
     {
-        public static void Setup(ComboBox category, NumericUpDown stock, NumericUpDown reorder, NumericUpDown price)
+        public static void Setup(ComboBox category, NumericUpDown stock, NumericUpDown reorder)
         {
             category.DropDownStyle = ComboBoxStyle.DropDownList;
             category.DisplayMember = "category_name";
             category.ValueMember = "category_id";
             category.DataSource = DBconnection.Query("SELECT category_id, category_name FROM categories ORDER BY category_name");
 
-            if (stock != null)
+            if (stock != null)      
                 stock.Maximum = 1000000;
             reorder.Maximum = 1000000;
-            price.Maximum = 99999999;
-            price.DecimalPlaces = 2;
         }
 
         public static bool Validate(TextBox name, ComboBox category)

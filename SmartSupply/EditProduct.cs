@@ -23,7 +23,7 @@ namespace SmartSupply
         public EditProduct(int productId) : this()
         {
             this.productId = productId;
-            ProductFields.Setup(comboBox1, null, numericUpDown2, numericUpDown3);
+            ProductFields.Setup(comboBox1, null, numericUpDown2);
             btnSaveProduct.Click += btnSaveProduct_Click;
             LoadProduct();
         }
@@ -31,7 +31,7 @@ namespace SmartSupply
         private void LoadProduct()
         {
             DataTable table = DBconnection.Query(
-                "SELECT product_name, category_id, reorder_level, unit_price FROM products WHERE product_id = @id",
+                "SELECT product_name, category_id, reorder_level FROM products WHERE product_id = @id",
                 new SqlParameter("@id", productId));
             if (table.Rows.Count == 0)
                 return;
@@ -41,7 +41,6 @@ namespace SmartSupply
             if (row["category_id"] != DBNull.Value)
                 comboBox1.SelectedValue = row["category_id"];
             numericUpDown2.Value = Convert.ToDecimal(row["reorder_level"]);
-            numericUpDown3.Value = Convert.ToDecimal(row["unit_price"]);
         }
 
         private void btnSaveProduct_Click(object sender, EventArgs e)
@@ -53,11 +52,10 @@ namespace SmartSupply
             {
                 DBconnection.Execute(
                     "UPDATE products SET product_name = @name, category_id = @category, " +
-                    "reorder_level = @reorder, unit_price = @price WHERE product_id = @id",
+                    "reorder_level = @reorder WHERE product_id = @id",
                     new SqlParameter("@name", textBox1.Text.Trim()),
                     new SqlParameter("@category", comboBox1.SelectedValue),
                     new SqlParameter("@reorder", (int)numericUpDown2.Value),
-                    new SqlParameter("@price", numericUpDown3.Value),
                     new SqlParameter("@id", productId));
 
                 DialogResult = DialogResult.OK;

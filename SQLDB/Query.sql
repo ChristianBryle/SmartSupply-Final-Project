@@ -73,6 +73,7 @@ CREATE TABLE users (
 -- Username: user Password: user
 INSERT INTO users (username, password_hash)
 VALUES ('user', LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', 'user'), 2)));
+
 CREATE TABLE sales (
     sale_id        INT IDENTITY(1,1) PRIMARY KEY,
     sale_number    AS ('OR-' + RIGHT('000000' + CAST(sale_id AS VARCHAR(10)), 6)) PERSISTED,
