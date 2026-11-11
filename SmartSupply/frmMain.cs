@@ -23,10 +23,6 @@ namespace SmartSupply
 
         private int? viewingQuotationId;
 
-        public frmMain() : this(1)
-        {
-        }
-
         public frmMain(int userId)
         {
             InitializeComponent();
@@ -149,8 +145,6 @@ namespace SmartSupply
             ResetMarginResults();
         }
 
-        // ---------- MARKUP ----------
-
         private void btnCalculateMarkUp_Click(object sender, EventArgs e)
         {
             DataRow row = FindProductRow(_markupProducts, cboProductMarkUp.Text);
@@ -200,8 +194,6 @@ namespace SmartSupply
             lblUnitCostMarkUp.Text = Peso(unitCost);
             lblProfitMarkUp.Text = Peso(profit);
         }
-
-        // ---------- SMART MARGIN ----------
 
         private void btnCalculateMargin_Click(object sender, EventArgs e)
         {
@@ -416,9 +408,6 @@ namespace SmartSupply
         {
             MessageBox.Show(message, "Price Calculator", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
-
-
-
 
         private readonly DataTable cart = new DataTable();
 
@@ -699,11 +688,6 @@ namespace SmartSupply
             pnlPriceCalculator.BringToFront();
         }
 
-        private void panel21_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
             AddProduct addProduct = new AddProduct();
@@ -751,21 +735,6 @@ namespace SmartSupply
             markUp.Show();
         }
 
-        private void label55_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label58_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label43_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnQuatation_Click(object sender, EventArgs e)
         {
             pnlQuotation.Show();
@@ -796,30 +765,10 @@ namespace SmartSupply
             dataGridView7.Columns["Date"].DefaultCellStyle.Format = "d";
         }
 
-        private void LoadQuotationItems(int quotationId, string title)
-        {
-            viewingQuotationId = quotationId;
-            button1.Text = "Back";
-            label68.Text = title;
-            dataGridView7.DataSource = DBconnection.Query(
-                "SELECT p.product_name AS [Product], i.quantity AS [Qty], i.unit_price AS [Price], i.total_price AS [Total] " +
-                "FROM quotation_items i JOIN products p ON p.product_id = i.product_id " +
-                "WHERE i.quotation_id = @id ORDER BY p.product_name",
-                new SqlParameter("@id", quotationId));
-            dataGridView7.Columns["Price"].DefaultCellStyle.Format = "N2";
-            dataGridView7.Columns["Total"].DefaultCellStyle.Format = "N2";
-        }
-
         private void btnViewQuotation_Click(object sender, EventArgs e)
         {
             try
             {
-                if (viewingQuotationId != null)
-                {
-                    LoadQuotations();
-                    return;
-                }
-
                 int? id = SelectedId(dataGridView7, "ID");
                 if (id == null)
                 {
@@ -828,8 +777,12 @@ namespace SmartSupply
                 }
 
                 DataGridViewRow row = dataGridView7.CurrentRow;
-                string title = row.Cells["Quotation No."].Value + " - " + row.Cells["Name"].Value;
-                LoadQuotationItems(id.Value, title);
+                string quotationNo = row.Cells["Quotation No."].Value.ToString();
+                string quotationName = row.Cells["Name"].Value.ToString();
+                string title = quotationNo + " - " + quotationName;
+
+                Qoutation_items form = new Qoutation_items(id.Value, title);
+                form.ShowDialog(this);
             }
             catch (SqlException ex)
             {
@@ -1030,31 +983,6 @@ namespace SmartSupply
             {
                 MessageBox.Show("Database error.\n" + ex.Message, "SmartSupply", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCalculateMarkUp_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MarkUpPercent_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
-
-        private void cboMarkUpPercent_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label59_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -20,21 +20,6 @@ namespace SmartSupply
             AcceptButton = btnLogin;
         }
 
-        private void label57_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = textBox1.Text.Trim();
@@ -70,7 +55,13 @@ namespace SmartSupply
             }
 
             frmMain Main = new frmMain(userId);
-            Main.FormClosed += (s, args) => Close();
+            Main.FormClosed += (s, args) =>
+            {
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox1.Focus();
+                this.Show();
+            };
             Main.Show();
             Hide();
         }

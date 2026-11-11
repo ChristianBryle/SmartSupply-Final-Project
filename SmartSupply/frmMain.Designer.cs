@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlNavigator = new System.Windows.Forms.Panel();
             this.btnQuatation = new System.Windows.Forms.Button();
             this.label57 = new System.Windows.Forms.Label();
             this.brtnPriceCalculator = new System.Windows.Forms.Button();
@@ -159,7 +159,7 @@
             this.dataGridView7 = new System.Windows.Forms.DataGridView();
             this.label69 = new System.Windows.Forms.Label();
             this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
-            this.panel1.SuspendLayout();
+            this.pnlNavigator.SuspendLayout();
             this.pnlInventoryMovements.SuspendLayout();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -197,24 +197,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnlNavigator
             // 
-            this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
-            this.panel1.Controls.Add(this.btnQuatation);
-            this.panel1.Controls.Add(this.label57);
-            this.panel1.Controls.Add(this.brtnPriceCalculator);
-            this.panel1.Controls.Add(this.btnExit);
-            this.panel1.Controls.Add(this.btnCategories);
-            this.panel1.Controls.Add(this.btnInventoryMovements);
-            this.panel1.Controls.Add(this.btnPOS);
-            this.panel1.Controls.Add(this.btnProduct);
-            this.panel1.Controls.Add(this.btnDashboard);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(272, 804);
-            this.panel1.TabIndex = 0;
+            this.pnlNavigator.BackColor = System.Drawing.Color.MidnightBlue;
+            this.pnlNavigator.Controls.Add(this.btnQuatation);
+            this.pnlNavigator.Controls.Add(this.label57);
+            this.pnlNavigator.Controls.Add(this.brtnPriceCalculator);
+            this.pnlNavigator.Controls.Add(this.btnExit);
+            this.pnlNavigator.Controls.Add(this.btnCategories);
+            this.pnlNavigator.Controls.Add(this.btnInventoryMovements);
+            this.pnlNavigator.Controls.Add(this.btnPOS);
+            this.pnlNavigator.Controls.Add(this.btnProduct);
+            this.pnlNavigator.Controls.Add(this.btnDashboard);
+            this.pnlNavigator.Controls.Add(this.label1);
+            this.pnlNavigator.Location = new System.Drawing.Point(0, 0);
+            this.pnlNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlNavigator.Name = "pnlNavigator";
+            this.pnlNavigator.Size = new System.Drawing.Size(272, 804);
+            this.pnlNavigator.TabIndex = 0;
             // 
             // btnQuatation
             // 
@@ -742,7 +742,6 @@
             this.label43.Size = new System.Drawing.Size(174, 31);
             this.label43.TabIndex = 31;
             this.label43.Text = "Select Products";
-            this.label43.Click += new System.EventHandler(this.label43_Click);
             // 
             // dataGridView5
             // 
@@ -839,7 +838,7 @@
             this.label35.ForeColor = System.Drawing.Color.Lime;
             this.label35.Location = new System.Drawing.Point(308, 556);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(227, 37);
+            this.label35.Size = new System.Drawing.Size(229, 37);
             this.label35.TabIndex = 40;
             this.label35.Text = " ₱ 0.00";
             this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -852,6 +851,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(236, 30);
             this.textBox3.TabIndex = 39;
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label37
             // 
@@ -859,7 +859,7 @@
             this.label37.ForeColor = System.Drawing.Color.Black;
             this.label37.Location = new System.Drawing.Point(297, 482);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(237, 37);
+            this.label37.Size = new System.Drawing.Size(245, 37);
             this.label37.TabIndex = 38;
             this.label37.Text = "₱ 0.00";
             this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -930,7 +930,6 @@
             this.panel21.Name = "panel21";
             this.panel21.Size = new System.Drawing.Size(1138, 97);
             this.panel21.TabIndex = 39;
-            this.panel21.Paint += new System.Windows.Forms.PaintEventHandler(this.panel21_Paint);
             // 
             // label44
             // 
@@ -1121,7 +1120,6 @@
             this.label55.Size = new System.Drawing.Size(97, 23);
             this.label55.TabIndex = 0;
             this.label55.Text = "Transaction";
-            this.label55.Click += new System.EventHandler(this.label55_Click);
             // 
             // label56
             // 
@@ -1345,7 +1343,6 @@
             this.label59.Size = new System.Drawing.Size(200, 38);
             this.label59.TabIndex = 32;
             this.label59.Text = "Smart Margin";
-            this.label59.Click += new System.EventHandler(this.label59_Click);
             // 
             // cboProductMargin
             // 
@@ -1459,7 +1456,6 @@
             this.label6.Size = new System.Drawing.Size(132, 25);
             this.label6.TabIndex = 58;
             this.label6.Text = "Mark Up Total";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label3
             // 
@@ -1477,12 +1473,11 @@
             this.cboMarkUpPercent.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboMarkUpPercent.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboMarkUpPercent.FormattingEnabled = true;
-            this.cboMarkUpPercent.Location = new System.Drawing.Point(45, 359);
+            this.cboMarkUpPercent.Location = new System.Drawing.Point(47, 359);
             this.cboMarkUpPercent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboMarkUpPercent.Name = "cboMarkUpPercent";
-            this.cboMarkUpPercent.Size = new System.Drawing.Size(457, 36);
+            this.cboMarkUpPercent.Size = new System.Drawing.Size(455, 36);
             this.cboMarkUpPercent.TabIndex = 36;
-            this.cboMarkUpPercent.SelectedIndexChanged += new System.EventHandler(this.cboMarkUpPercent_SelectedIndexChanged);
             // 
             // panel7
             // 
@@ -1536,7 +1531,6 @@
             this.btnCalculateMarkUp.TabIndex = 4;
             this.btnCalculateMarkUp.Text = "Calculate";
             this.btnCalculateMarkUp.UseVisualStyleBackColor = false;
-            this.btnCalculateMarkUp.Click += new System.EventHandler(this.btnCalculateMarkUp_Click_1);
             // 
             // lblUnitCostMarkUp
             // 
@@ -1753,7 +1747,6 @@
             this.label58.Size = new System.Drawing.Size(178, 45);
             this.label58.TabIndex = 30;
             this.label58.Text = "Quotation";
-            this.label58.Click += new System.EventHandler(this.label58_Click);
             // 
             // label68
             // 
@@ -1800,21 +1793,21 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1409, 804);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pnlPriceCalculator);
+            this.Controls.Add(this.pnlNavigator);
             this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.pnlPOSTerminal);
             this.Controls.Add(this.pnlProducts);
             this.Controls.Add(this.pnlCategories);
             this.Controls.Add(this.pnlQuotation);
             this.Controls.Add(this.pnlInventoryMovements);
+            this.Controls.Add(this.pnlPriceCalculator);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmMain";
             this.Text = "SmartSupply";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlNavigator.ResumeLayout(false);
+            this.pnlNavigator.PerformLayout();
             this.pnlInventoryMovements.ResumeLayout(false);
             this.pnlInventoryMovements.PerformLayout();
             this.panel8.ResumeLayout(false);
@@ -1879,7 +1872,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlNavigator;
         private System.Windows.Forms.Button btnDashboard;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCategories;

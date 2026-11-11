@@ -60,7 +60,6 @@
             this.label57.Size = new System.Drawing.Size(240, 17);
             this.label57.TabIndex = 9;
             this.label57.Text = "INVENTORY • POS • PRICE CALCULATOR";
-            this.label57.Click += new System.EventHandler(this.label57_Click);
             // 
             // label1
             // 
@@ -72,7 +71,6 @@
             this.label1.Size = new System.Drawing.Size(277, 54);
             this.label1.TabIndex = 0;
             this.label1.Text = "Smart Supply";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBox1
             // 
@@ -122,7 +120,6 @@
             this.label4.Size = new System.Drawing.Size(197, 54);
             this.label4.TabIndex = 10;
             this.label4.Text = "Welcome";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // btnLogin
             // 

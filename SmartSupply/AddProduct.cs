@@ -16,7 +16,7 @@ namespace SmartSupply
         public AddProduct()
         {
             InitializeComponent();
-            ProductFields.Setup(comboBox1, null, numericUpDown2, numericUpDown3);
+            ProductFields.Setup(comboBox1, null, numericUpDown2);
             numericUpDown2.Value = 10;
             btnSaveProduct.Click += btnSaveProduct_Click;
         }
@@ -29,12 +29,11 @@ namespace SmartSupply
             try
             {
                 DBconnection.Execute(
-                    "INSERT INTO products (product_name, category_id, reorder_level, unit_price) " +
-                    "VALUES (@name, @category, @reorder, @price)",
+                    "INSERT INTO products (product_name, category_id, reorder_level) " +
+                    "VALUES (@name, @category, @reorder)",
                     new SqlParameter("@name", textBox1.Text.Trim()),
                     new SqlParameter("@category", comboBox1.SelectedValue),
-                    new SqlParameter("@reorder", (int)numericUpDown2.Value),
-                    new SqlParameter("@price", numericUpDown3.Value));
+                    new SqlParameter("@reorder", (int)numericUpDown2.Value));
 
                 DialogResult = DialogResult.OK;
                 Close();

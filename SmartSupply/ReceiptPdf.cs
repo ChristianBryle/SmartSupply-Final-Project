@@ -9,22 +9,15 @@ namespace SmartSupply
 {
     internal static class ReceiptPdf
     {
-        private const string FolderName = "Reciept";
+        private const string FolderPath = @"C:\Users\chris\source\repos\SmartSupply\SmartSupply\Receipt";
 
         public static string GetReceiptFolder()
         {
-            DirectoryInfo dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-            while (dir != null)
+            if (!Directory.Exists(FolderPath))
             {
-                string candidate = Path.Combine(dir.FullName, FolderName);
-                if (Directory.Exists(candidate))
-                    return candidate;
-                dir = dir.Parent;
+                Directory.CreateDirectory(FolderPath);
             }
-
-            string fallback = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FolderName);
-            Directory.CreateDirectory(fallback);
-            return fallback;
+            return FolderPath;
         }
 
         public static string Save(string saleNumber, DateTime saleDate, DataTable items, decimal total, decimal cash, decimal change)
