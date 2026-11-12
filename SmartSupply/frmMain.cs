@@ -68,12 +68,11 @@ namespace SmartSupply
             ConfigureNumeric(nudQuantityMargin, 0);
             ConfigureNumeric(nudTotalCostMarkUp, 2);
             ConfigureNumeric(nudTotalCostMargin, 2);
-            ConfigurePercentCombo(cboMarkUpPercent);
-            ConfigurePercentCombo(btnCalculateMargin);
+            ConfigurePercentTextBox(cboMarkUpPercent);
+            ConfigurePercentTextBox(textBox4);
 
-            nudQuantityMarkUp.ReadOnly = true;
-            nudQuantityMarkUp.Increment = 0;
-            nudQuantityMarkUp.TabStop = false;
+            nudQuantityMarkUp.ReadOnly = false;
+            nudQuantityMarkUp.Increment = 1;
 
             cboProductMarkUp.SelectedIndexChanged -= cboProductMarkUp_Changed;
             cboProductMarkUp.SelectedIndexChanged += cboProductMarkUp_Changed;
@@ -89,15 +88,15 @@ namespace SmartSupply
             nudTotalCostMarkUp.ValueChanged += MarkupInput_Changed;
             nudQuantityMarkUp.ValueChanged -= MarkupInput_Changed;
             nudQuantityMarkUp.ValueChanged += MarkupInput_Changed;
-            cboMarkUpPercent.SelectedIndexChanged -= MarkupInput_Changed;
-            cboMarkUpPercent.SelectedIndexChanged += MarkupInput_Changed;
+            cboMarkUpPercent.TextChanged -= MarkupInput_Changed;
+            cboMarkUpPercent.TextChanged += MarkupInput_Changed;
 
             nudTotalCostMargin.ValueChanged -= MarginInput_Changed;
             nudTotalCostMargin.ValueChanged += MarginInput_Changed;
             nudQuantityMargin.ValueChanged -= MarginInput_Changed;
             nudQuantityMargin.ValueChanged += MarginInput_Changed;
-            btnCalculateMargin.SelectedIndexChanged -= MarginInput_Changed;
-            btnCalculateMargin.SelectedIndexChanged += MarginInput_Changed;
+            textBox4.TextChanged -= MarginInput_Changed;
+            textBox4.TextChanged += MarginInput_Changed;
 
             btnCalculateMarkUp.Click -= btnCalculateMarkUp_Click;
             btnCalculateMarkUp.Click += btnCalculateMarkUp_Click;
@@ -113,18 +112,6 @@ namespace SmartSupply
         {
             if (_loadingProducts) return;
             ResetMarkupResults();
-
-            DataRow row = FindProductRow(_markupProducts, cboProductMarkUp.Text);
-            if (row != null)
-            {
-                decimal stock = Convert.ToDecimal(row["quantity"]);
-                nudQuantityMarkUp.Value = Math.Max(nudQuantityMarkUp.Minimum,
-                                          Math.Min(stock, nudQuantityMarkUp.Maximum));
-            }
-            else
-            {
-                nudQuantityMarkUp.Value = 0;
-            }
         }
 
         private void cboProductMargin_Changed(object sender, EventArgs e)
@@ -155,7 +142,7 @@ namespace SmartSupply
             }
 
             int productId = Convert.ToInt32(row["product_id"]);
-            decimal quantity = Convert.ToDecimal(row["quantity"]);
+            decimal quantity = nudQuantityMarkUp.Value;
             decimal totalCost = nudTotalCostMarkUp.Value;
 
             if (quantity <= 0)
@@ -172,27 +159,25 @@ namespace SmartSupply
             decimal markup;
             if (string.IsNullOrWhiteSpace(cboMarkUpPercent.Text) || !TryGetPercent(cboMarkUpPercent, out markup))
             {
-                ShowInputError("Please select a valid markup percentage.");
-                return;
-            }
-            if (markup < 0m)
-            {
-                ShowInputError("Markup percentage cannot be negative.");
+                ShowInputError("Markup percentage must be a whole number from 1 to 99.");
                 return;
             }
 
             decimal unitCost = totalCost / quantity;
             decimal sellingPrice = Math.Round(unitCost * (1m + markup), 2, MidpointRounding.AwayFromZero);
             decimal profit = Math.Round(sellingPrice - unitCost, 2, MidpointRounding.AwayFromZero);
+            decimal totalProfit = Math.Round(profit * quantity, 2, MidpointRounding.AwayFromZero);
             unitCost = Math.Round(unitCost, 2, MidpointRounding.AwayFromZero);
 
-            if (!UpdateProductPrice(productId, sellingPrice)) return;
+            if (!SaveMarkUpSellingPrice(productId, sellingPrice)) return;
 
             RefreshProductsAfterUpdate();
 
             lblSellingPrice.Text = Peso(sellingPrice);
             lblUnitCostMarkUp.Text = Peso(unitCost);
             lblProfitMarkUp.Text = Peso(profit);
+            MessageBox.Show("Product selling price has been successfully updated!", "Price Calculator",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnCalculateMargin_Click(object sender, EventArgs e)
@@ -204,7 +189,6 @@ namespace SmartSupply
                 return;
             }
 
-            int productId = Convert.ToInt32(row["product_id"]);
             decimal quantity = nudQuantityMargin.Value;
             decimal totalCost = nudTotalCostMargin.Value;
 
@@ -220,14 +204,9 @@ namespace SmartSupply
             }
 
             decimal margin;
-            if (string.IsNullOrWhiteSpace(btnCalculateMargin.Text) || !TryGetPercent(btnCalculateMargin, out margin))
+            if (string.IsNullOrWhiteSpace(textBox4.Text) || !TryGetPercent(textBox4, out margin))
             {
-                ShowInputError("Please select a valid margin percentage.");
-                return;
-            }
-            if (margin < 0m || margin >= 1m)
-            {
-                ShowInputError("Margin percentage must be at least 0% and less than 100%.");
+                ShowInputError("Margin percentage must be a whole number from 1 to 99.");
                 return;
             }
 
@@ -236,10 +215,6 @@ namespace SmartSupply
             decimal profit = Math.Round(sellingPrice - unitCost, 2, MidpointRounding.AwayFromZero);
             unitCost = Math.Round(unitCost, 2, MidpointRounding.AwayFromZero);
 
-            if (!UpdateProductPrice(productId, sellingPrice)) return;
-
-            RefreshProductsAfterUpdate();
-
             lblSuggestedPrice.Text = Peso(sellingPrice);
             lblUnitCostMargin.Text = Peso(unitCost);
             lblProfitMargin.Text = Peso(profit);
@@ -247,12 +222,18 @@ namespace SmartSupply
 
         private void RefreshProductsAfterUpdate()
         {
+            RefreshProducts();
+        }
+
+        public void RefreshProducts()
+        {
             DataRow markupRow = FindProductRow(_markupProducts, cboProductMarkUp.Text);
             DataRow marginRow = FindProductRow(_marginProducts, cboProductMargin.Text);
             object markupId = markupRow != null ? markupRow["product_id"] : null;
             object marginId = marginRow != null ? marginRow["product_id"] : null;
 
             LoadPriceProducts();
+            LoadProducts();
 
             _loadingProducts = true;
             try
@@ -260,9 +241,6 @@ namespace SmartSupply
                 if (markupId != null)
                 {
                     cboProductMarkUp.SelectedValue = markupId;
-                    DataRow r = FindProductRow(_markupProducts, cboProductMarkUp.Text);
-                    if (r != null)
-                        nudQuantityMarkUp.Value = Math.Min(Convert.ToDecimal(r["quantity"]), nudQuantityMarkUp.Maximum);
                 }
                 if (marginId != null)
                 {
@@ -312,16 +290,30 @@ namespace SmartSupply
             combo.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
-        private static void ConfigurePercentCombo(ComboBox combo)
+        private static void ConfigurePercentTextBox(TextBox textBox)
         {
-            combo.Items.Clear();
-            for (int percent = 0; percent <= 90; percent += 5)
-                combo.Items.Add(percent.ToString(CultureInfo.InvariantCulture) + "%");
+            textBox.Text = string.Empty;
+            textBox.KeyPress -= PercentTextBox_KeyPress;
+            textBox.KeyPress += PercentTextBox_KeyPress;
+        }
 
-            combo.DropDownStyle = ComboBoxStyle.DropDownList;
-            combo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            combo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            combo.SelectedIndex = -1;
+        private static void PercentTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (char.IsControl(e.KeyChar))
+                return;
+
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            string value = textBox.Text.Remove(textBox.SelectionStart, textBox.SelectionLength)
+                .Insert(textBox.SelectionStart, e.KeyChar.ToString());
+            if (!int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out int wholeNumber) ||
+                wholeNumber < 1 || wholeNumber > 99)
+                e.Handled = true;
         }
 
         private static void ConfigureNumeric(NumericUpDown numeric, int decimalPlaces)
@@ -352,27 +344,35 @@ namespace SmartSupply
                 "SELECT product_id, product_name, quantity, unit_price FROM products ORDER BY product_name");
         }
 
-        private static bool TryGetPercent(ComboBox combo, out decimal percent)
+        private static bool TryGetPercent(TextBox textBox, out decimal percent)
         {
             percent = 0m;
-            string value = (combo.Text ?? string.Empty).Trim().TrimEnd('%').Trim();
+            string value = (textBox.Text ?? string.Empty).Trim();
             decimal numericValue;
 
-            if (!decimal.TryParse(value, NumberStyles.Number, CultureInfo.CurrentCulture, out numericValue))
+            if (!int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out int wholeNumber) ||
+                wholeNumber < 1 || wholeNumber > 99)
                 return false;
 
+            numericValue = wholeNumber;
             percent = numericValue / 100m;
             return true;
         }
 
-        private bool UpdateProductPrice(int productId, decimal sellingPrice)
+        private bool SaveMarkUpSellingPrice(int productId, decimal sellingPrice)
         {
             try
             {
-                DBconnection.Execute(
+                int affectedRows = DBconnection.Execute(
                     "UPDATE products SET unit_price = @price WHERE product_id = @id",
                     new SqlParameter("@price", sellingPrice),
                     new SqlParameter("@id", productId));
+                if (affectedRows != 1)
+                {
+                    MessageBox.Show("The product selling price was not saved.",
+                        "Price Calculator", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
                 return true;
             }
             catch (SqlException ex)
@@ -388,7 +388,7 @@ namespace SmartSupply
             lblSellingPrice.Text = Peso(0m);
             lblUnitCostMarkUp.Text = Peso(0m);
             lblProfitMarkUp.Text = Peso(0m);
-            lblMarkUpUsed.Text = "----";
+            lblMarkUpUsed.Text = string.Empty;
         }
 
         private void ResetMarginResults()
@@ -396,7 +396,7 @@ namespace SmartSupply
             lblSuggestedPrice.Text = Peso(0m);
             lblUnitCostMargin.Text = Peso(0m);
             lblProfitMargin.Text = Peso(0m);
-            lblMarginUsed.Text = "----";
+            lblMarginUsed.Text = string.Empty;
         }
 
         private static string Peso(decimal value)
@@ -692,7 +692,7 @@ namespace SmartSupply
         {
             AddProduct addProduct = new AddProduct();
             if (addProduct.ShowDialog(this) == DialogResult.OK)
-                RefreshAll();
+                RefreshProducts();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -718,7 +718,7 @@ namespace SmartSupply
             }
             EditProduct editProduct = new EditProduct(id.Value);
             if (editProduct.ShowDialog(this) == DialogResult.OK)
-                RefreshAll();
+                RefreshProducts();
 
         }
 
@@ -983,6 +983,11 @@ namespace SmartSupply
             {
                 MessageBox.Show("Database error.\n" + ex.Message, "SmartSupply", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void lblProfitMargin_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
