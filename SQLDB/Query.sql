@@ -14,12 +14,15 @@ CREATE TABLE products (
     category_id      INT,
     quantity         INT DEFAULT 0,
     unit_price       DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    selling_price    DECIMAL(10,2) NOT NULL DEFAULT 0.00,
     reorder_level    INT NOT NULL DEFAULT 10,
 
     FOREIGN KEY (category_id)
         REFERENCES categories(category_id),
 
 );
+
+UPDATE products SET selling_price = unit_price;
 
 CREATE TABLE Transactions_log (
     transaction_id    INT IDENTITY(1,1) PRIMARY KEY,

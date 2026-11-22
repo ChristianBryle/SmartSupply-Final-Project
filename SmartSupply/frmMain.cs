@@ -20,6 +20,14 @@ namespace SmartSupply
         private DataTable _markupProducts;
         private DataTable _marginProducts;
         private bool _loadingProducts = false;
+        private bool _updatingCalculatorFields;
+        private bool _markupPriceWasLastEdited;
+        private bool _marginPriceWasLastEdited;
+        private bool _markupCalculationValid;
+        private decimal? _markupOriginalCalculatedPrice;
+        private decimal? _marginOriginalCalculatedPrice;
+        private decimal? _markupLastValidPrice;
+        private decimal? _marginLastValidPrice;
 
         private int? viewingQuotationId;
 
@@ -70,6 +78,8 @@ namespace SmartSupply
             ConfigureNumeric(nudTotalCostMargin, 2);
             ConfigurePercentTextBox(cboMarkUpPercent);
             ConfigurePercentTextBox(textBox4);
+            ConfigurePriceTextBox(lblSellingPrice);
+            ConfigurePriceTextBox(lblSuggestedPrice);
 
             nudQuantityMarkUp.ReadOnly = false;
             nudQuantityMarkUp.Increment = 1;
@@ -88,20 +98,26 @@ namespace SmartSupply
             nudTotalCostMarkUp.ValueChanged += MarkupInput_Changed;
             nudQuantityMarkUp.ValueChanged -= MarkupInput_Changed;
             nudQuantityMarkUp.ValueChanged += MarkupInput_Changed;
-            cboMarkUpPercent.TextChanged -= MarkupInput_Changed;
-            cboMarkUpPercent.TextChanged += MarkupInput_Changed;
+            cboMarkUpPercent.TextChanged -= MarkupPercent_Changed;
+            cboMarkUpPercent.TextChanged += MarkupPercent_Changed;
+            lblSellingPrice.TextChanged -= MarkupPrice_Changed;
+            lblSellingPrice.TextChanged += MarkupPrice_Changed;
 
             nudTotalCostMargin.ValueChanged -= MarginInput_Changed;
             nudTotalCostMargin.ValueChanged += MarginInput_Changed;
             nudQuantityMargin.ValueChanged -= MarginInput_Changed;
             nudQuantityMargin.ValueChanged += MarginInput_Changed;
-            textBox4.TextChanged -= MarginInput_Changed;
-            textBox4.TextChanged += MarginInput_Changed;
+            textBox4.TextChanged -= MarginPercent_Changed;
+            textBox4.TextChanged += MarginPercent_Changed;
+            lblSuggestedPrice.TextChanged -= MarginPrice_Changed;
+            lblSuggestedPrice.TextChanged += MarginPrice_Changed;
 
             btnCalculateMarkUp.Click -= btnCalculateMarkUp_Click;
             btnCalculateMarkUp.Click += btnCalculateMarkUp_Click;
             smartmarginbutton.Click -= btnCalculateMargin_Click;
             smartmarginbutton.Click += btnCalculateMargin_Click;
+            btnApplyMarkUpPrice.Click -= btnApplyMarkUpPrice_Click;
+            btnApplyMarkUpPrice.Click += btnApplyMarkUpPrice_Click;
 
             LoadPriceProducts();
             ResetMarkupResults();
@@ -122,14 +138,46 @@ namespace SmartSupply
 
         private void MarkupInput_Changed(object sender, EventArgs e)
         {
-            if (_loadingProducts) return;
+            if (_loadingProducts || _updatingCalculatorFields) return;
+            _markupPriceWasLastEdited = false;
             ResetMarkupResults();
         }
 
         private void MarginInput_Changed(object sender, EventArgs e)
         {
-            if (_loadingProducts) return;
+            if (_loadingProducts || _updatingCalculatorFields) return;
+            _marginPriceWasLastEdited = false;
             ResetMarginResults();
+        }
+
+        private void MarkupPercent_Changed(object sender, EventArgs e)
+        {
+            if (_loadingProducts || _updatingCalculatorFields) return;
+            _markupPriceWasLastEdited = false;
+            ResetMarkupResults();
+        }
+
+        private void MarginPercent_Changed(object sender, EventArgs e)
+        {
+            if (_loadingProducts || _updatingCalculatorFields) return;
+            _marginPriceWasLastEdited = false;
+            ResetMarginResults();
+        }
+
+        private void MarkupPrice_Changed(object sender, EventArgs e)
+        {
+            if (_loadingProducts || _updatingCalculatorFields) return;
+            _markupPriceWasLastEdited = true;
+            lblUnitCostMarkUp.Text = Peso(0m);
+            lblProfitMarkUp.Text = Peso(0m);
+        }
+
+        private void MarginPrice_Changed(object sender, EventArgs e)
+        {
+            if (_loadingProducts || _updatingCalculatorFields) return;
+            _marginPriceWasLastEdited = true;
+            lblUnitCostMargin.Text = Peso(0m);
+            lblProfitMargin.Text = Peso(0m);
         }
 
         private void btnCalculateMarkUp_Click(object sender, EventArgs e)
@@ -141,7 +189,6 @@ namespace SmartSupply
                 return;
             }
 
-            int productId = Convert.ToInt32(row["product_id"]);
             decimal quantity = nudQuantityMarkUp.Value;
             decimal totalCost = nudTotalCostMarkUp.Value;
 
@@ -157,27 +204,60 @@ namespace SmartSupply
             }
 
             decimal markup;
-            if (string.IsNullOrWhiteSpace(cboMarkUpPercent.Text) || !TryGetPercent(cboMarkUpPercent, out markup))
+            decimal unitCost = totalCost / quantity;
+            decimal sellingPrice;
+
+            if (_markupPriceWasLastEdited)
             {
-                ShowInputError("Markup percentage must be a whole number from 1 to 99.");
-                return;
+                if (!TryGetPrice(lblSellingPrice, out sellingPrice) || sellingPrice <= 0m)
+                {
+                    ShowInputError("Please enter a valid selling price greater than zero.");
+                    RestoreMarkupPrice();
+                    _markupCalculationValid = false;
+                    btnApplyMarkUpPrice.Enabled = false;
+                    return;
+                }
+
+                if (_markupOriginalCalculatedPrice.HasValue && sellingPrice < _markupOriginalCalculatedPrice.Value)
+                {
+                    ShowPriceBelowOriginal(_markupOriginalCalculatedPrice.Value);
+                    RestoreMarkupPrice();
+                    _markupCalculationValid = false;
+                    btnApplyMarkUpPrice.Enabled = false;
+                    return;
+                }
+
+                if (sellingPrice < unitCost && !ConfirmLossSellingPrice(unitCost))
+                {
+                    _markupCalculationValid = false;
+                    btnApplyMarkUpPrice.Enabled = false;
+                    return;
+                }
+
+                markup = ((sellingPrice - unitCost) / unitCost) * 100m;
+                SetCalculatorText(cboMarkUpPercent, markup.ToString("0.00", CultureInfo.InvariantCulture));
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(cboMarkUpPercent.Text) || !TryGetPercent(cboMarkUpPercent, out markup))
+                {
+                    ShowInputError("Markup percentage must be a whole number from 1 to 99.");
+                    return;
+                }
+
+                sellingPrice = Math.Round(unitCost * (1m + markup), 2, MidpointRounding.AwayFromZero);
+                SetCalculatorText(lblSellingPrice, Peso(sellingPrice));
+                _markupOriginalCalculatedPrice = sellingPrice;
             }
 
-            decimal unitCost = totalCost / quantity;
-            decimal sellingPrice = Math.Round(unitCost * (1m + markup), 2, MidpointRounding.AwayFromZero);
+            _markupLastValidPrice = sellingPrice;
+
             decimal profit = Math.Round(sellingPrice - unitCost, 2, MidpointRounding.AwayFromZero);
-            decimal totalProfit = Math.Round(profit * quantity, 2, MidpointRounding.AwayFromZero);
             unitCost = Math.Round(unitCost, 2, MidpointRounding.AwayFromZero);
-
-            if (!SaveMarkUpSellingPrice(productId, sellingPrice)) return;
-
-            RefreshProductsAfterUpdate();
-
-            lblSellingPrice.Text = Peso(sellingPrice);
             lblUnitCostMarkUp.Text = Peso(unitCost);
             lblProfitMarkUp.Text = Peso(profit);
-            MessageBox.Show("Product selling price has been successfully updated!", "Price Calculator",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            _markupCalculationValid = true;
+            btnApplyMarkUpPrice.Enabled = true;
         }
 
         private void btnCalculateMargin_Click(object sender, EventArgs e)
@@ -204,20 +284,109 @@ namespace SmartSupply
             }
 
             decimal margin;
-            if (string.IsNullOrWhiteSpace(textBox4.Text) || !TryGetPercent(textBox4, out margin))
+            decimal unitCost = totalCost / quantity;
+            decimal sellingPrice;
+
+            if (_marginPriceWasLastEdited)
             {
-                ShowInputError("Margin percentage must be a whole number from 1 to 99.");
+                if (!TryGetPrice(lblSuggestedPrice, out sellingPrice) || sellingPrice <= unitCost)
+                {
+                    ShowInputError("The suggested selling price must be greater than the unit cost.");
+                    RestoreMarginPrice();
+                    return;
+                }
+
+                if (_marginOriginalCalculatedPrice.HasValue && sellingPrice < _marginOriginalCalculatedPrice.Value)
+                {
+                    ShowPriceBelowOriginal(_marginOriginalCalculatedPrice.Value);
+                    RestoreMarginPrice();
+                    return;
+                }
+
+                margin = ((sellingPrice - unitCost) / sellingPrice) * 100m;
+                if (margin < 1m || margin > 99m)
+                {
+                    ShowInputError("The selling price produces a margin percentage outside the allowed range of 1% to 99%.");
+                    return;
+                }
+
+                SetCalculatorText(textBox4, margin.ToString("0.00", CultureInfo.InvariantCulture));
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(textBox4.Text) || !TryGetPercent(textBox4, out margin))
+                {
+                    ShowInputError("Margin percentage must be a whole number from 1 to 99.");
+                    return;
+                }
+
+                sellingPrice = Math.Round(unitCost / (1m - margin), 2, MidpointRounding.AwayFromZero);
+                SetCalculatorText(lblSuggestedPrice, Peso(sellingPrice));
+                _marginOriginalCalculatedPrice = sellingPrice;
+            }
+
+            _marginLastValidPrice = sellingPrice;
+
+            decimal profit = Math.Round(sellingPrice - unitCost, 2, MidpointRounding.AwayFromZero);
+            unitCost = Math.Round(unitCost, 2, MidpointRounding.AwayFromZero);
+            lblUnitCostMargin.Text = Peso(unitCost);
+            lblProfitMargin.Text = Peso(profit);
+        }
+
+        private void btnApplyMarkUpPrice_Click(object sender, EventArgs e)
+        {
+            if (!_markupCalculationValid)
+            {
+                ShowInputError("Please complete a valid Mark Up calculation first.");
+                return;
+            }
+
+            DataRow row = FindProductRow(_markupProducts, cboProductMarkUp.Text);
+            if (row == null)
+            {
+                ShowInputError("Please select a product from the list.");
+                return;
+            }
+
+            decimal quantity = nudQuantityMarkUp.Value;
+            decimal totalCost = nudTotalCostMarkUp.Value;
+            if (quantity <= 0 || totalCost <= 0 || !TryGetPrice(lblSellingPrice, out decimal sellingPrice))
+            {
+                ShowInputError("Please complete a valid Mark Up calculation first.");
+                return;
+            }
+
+            if (_markupOriginalCalculatedPrice.HasValue && sellingPrice < _markupOriginalCalculatedPrice.Value)
+            {
+                ShowPriceBelowOriginal(_markupOriginalCalculatedPrice.Value);
+                RestoreMarkupPrice();
+                _markupCalculationValid = false;
+                btnApplyMarkUpPrice.Enabled = false;
                 return;
             }
 
             decimal unitCost = totalCost / quantity;
-            decimal sellingPrice = Math.Round(unitCost / (1m - margin), 2, MidpointRounding.AwayFromZero);
-            decimal profit = Math.Round(sellingPrice - unitCost, 2, MidpointRounding.AwayFromZero);
-            unitCost = Math.Round(unitCost, 2, MidpointRounding.AwayFromZero);
+            if (sellingPrice <= unitCost)
+            {
+                ShowInvalidSellingPrice(unitCost);
+                btnApplyMarkUpPrice.Enabled = false;
+                _markupCalculationValid = false;
+                return;
+            }
 
-            lblSuggestedPrice.Text = Peso(sellingPrice);
-            lblUnitCostMargin.Text = Peso(unitCost);
-            lblProfitMargin.Text = Peso(profit);
+            string productName = Convert.ToString(row["product_name"]);
+            if (MessageBox.Show(
+                    "Set the selling price of " + productName + " to " + Peso(sellingPrice) + "?",
+                    "Price Calculator", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            int productId = Convert.ToInt32(row["product_id"]);
+            if (!SaveMarkUpSellingPrice(productId, sellingPrice))
+                return;
+
+            RefreshProducts();
+            MessageBox.Show("Product selling price has been successfully updated!", "Price Calculator",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void RefreshProductsAfterUpdate()
@@ -297,10 +466,72 @@ namespace SmartSupply
             textBox.KeyPress += PercentTextBox_KeyPress;
         }
 
+        private static void ConfigurePriceTextBox(TextBox textBox)
+        {
+            textBox.KeyPress -= PriceTextBox_KeyPress;
+            textBox.KeyPress += PriceTextBox_KeyPress;
+            textBox.Enter -= PriceTextBox_Enter;
+            textBox.Enter += PriceTextBox_Enter;
+            textBox.Leave -= PriceTextBox_Leave;
+            textBox.Leave += PriceTextBox_Leave;
+        }
+
+        private static void PriceTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (char.IsControl(e.KeyChar))
+                return;
+
+            if (e.KeyChar == '.' && !textBox.Text.Contains("."))
+                return;
+
+            if (!char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private static void PriceTextBox_Enter(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (TryGetPrice(textBox, out decimal price))
+            {
+                textBox.Text = price.ToString("0.00", CultureInfo.InvariantCulture);
+                textBox.SelectAll();
+            }
+        }
+
+        private static void PriceTextBox_Leave(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (TryGetPrice(textBox, out decimal price))
+                textBox.Text = Peso(price);
+        }
+
+        private void SetCalculatorText(TextBox textBox, string value)
+        {
+            _updatingCalculatorFields = true;
+            try
+            {
+                textBox.Text = value;
+            }
+            finally
+            {
+                _updatingCalculatorFields = false;
+            }
+        }
+
+        private static bool TryGetPrice(TextBox textBox, out decimal price)
+        {
+            string value = (textBox.Text ?? string.Empty).Replace("₱", string.Empty).Replace(",", string.Empty).Trim();
+            return decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out price);
+        }
+
         private static void PercentTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox textBox = sender as TextBox;
             if (char.IsControl(e.KeyChar))
+                return;
+
+            if (e.KeyChar == '.' && !textBox.Text.Contains("."))
                 return;
 
             if (!char.IsDigit(e.KeyChar))
@@ -311,8 +542,8 @@ namespace SmartSupply
 
             string value = textBox.Text.Remove(textBox.SelectionStart, textBox.SelectionLength)
                 .Insert(textBox.SelectionStart, e.KeyChar.ToString());
-            if (!int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out int wholeNumber) ||
-                wholeNumber < 1 || wholeNumber > 99)
+            if (!decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal percentage) ||
+                percentage < 1m || percentage > 99m)
                 e.Handled = true;
         }
 
@@ -341,20 +572,17 @@ namespace SmartSupply
         private static DataTable GetProductsTable()
         {
             return DBconnection.Query(
-                "SELECT product_id, product_name, quantity, unit_price FROM products ORDER BY product_name");
+                "SELECT product_id, product_name, quantity, selling_price FROM products ORDER BY product_name");
         }
 
         private static bool TryGetPercent(TextBox textBox, out decimal percent)
         {
             percent = 0m;
             string value = (textBox.Text ?? string.Empty).Trim();
-            decimal numericValue;
-
-            if (!int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out int wholeNumber) ||
-                wholeNumber < 1 || wholeNumber > 99)
+            if (!decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal numericValue) ||
+                numericValue < 1m || numericValue > 99m)
                 return false;
 
-            numericValue = wholeNumber;
             percent = numericValue / 100m;
             return true;
         }
@@ -364,7 +592,7 @@ namespace SmartSupply
             try
             {
                 int affectedRows = DBconnection.Execute(
-                    "UPDATE products SET unit_price = @price WHERE product_id = @id",
+                    "UPDATE products SET selling_price = @price WHERE product_id = @id",
                     new SqlParameter("@price", sellingPrice),
                     new SqlParameter("@id", productId));
                 if (affectedRows != 1)
@@ -385,7 +613,12 @@ namespace SmartSupply
 
         private void ResetMarkupResults()
         {
-            lblSellingPrice.Text = Peso(0m);
+            _markupPriceWasLastEdited = false;
+            _markupCalculationValid = false;
+            _markupOriginalCalculatedPrice = null;
+            _markupLastValidPrice = null;
+            btnApplyMarkUpPrice.Enabled = false;
+            SetCalculatorText(lblSellingPrice, Peso(0m));
             lblUnitCostMarkUp.Text = Peso(0m);
             lblProfitMarkUp.Text = Peso(0m);
             lblMarkUpUsed.Text = string.Empty;
@@ -393,10 +626,48 @@ namespace SmartSupply
 
         private void ResetMarginResults()
         {
-            lblSuggestedPrice.Text = Peso(0m);
+            _marginPriceWasLastEdited = false;
+            _marginOriginalCalculatedPrice = null;
+            _marginLastValidPrice = null;
+            SetCalculatorText(lblSuggestedPrice, Peso(0m));
             lblUnitCostMargin.Text = Peso(0m);
             lblProfitMargin.Text = Peso(0m);
             lblMarginUsed.Text = string.Empty;
+        }
+
+        private void RestoreMarkupPrice()
+        {
+            decimal? price = _markupLastValidPrice ?? _markupOriginalCalculatedPrice;
+            if (price.HasValue)
+                SetCalculatorText(lblSellingPrice, Peso(price.Value));
+        }
+
+        private void RestoreMarginPrice()
+        {
+            decimal? price = _marginLastValidPrice ?? _marginOriginalCalculatedPrice;
+            if (price.HasValue)
+                SetCalculatorText(lblSuggestedPrice, Peso(price.Value));
+        }
+
+        private static void ShowPriceBelowOriginal(decimal originalPrice)
+        {
+            MessageBox.Show(
+                "The selling price cannot be lower than the original calculated price of " + Peso(originalPrice) + ". Please enter an amount equal to or higher than " + Peso(originalPrice) + " to avoid losing money.",
+                "Invalid Selling Price", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void ShowInvalidSellingPrice(decimal unitCost)
+        {
+            MessageBox.Show(
+                "Invalid Selling Price! The selling price cannot be lower than the unit cost because this would result in a loss. Please enter a price higher than " + Peso(unitCost) + ".",
+                "Price Calculator", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private bool ConfirmLossSellingPrice(decimal unitCost)
+        {
+            return MessageBox.Show(
+                "The selling price is lower than the unit cost and would result in a loss. Do you want to continue?",
+                "Price Calculator", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
         }
 
         private static string Peso(decimal value)
@@ -452,7 +723,7 @@ namespace SmartSupply
         private void LoadPosProducts()
         {
             dataGridView5.DataSource = DBconnection.Query(
-                "SELECT product_id AS [ID], product_name AS [Product], quantity AS [Stock], unit_price AS [Price] " +
+                "SELECT product_id AS [ID], product_name AS [Product], quantity AS [Stock], selling_price AS [Price] " +
                 "FROM products WHERE quantity > 0 ORDER BY product_name");
             dataGridView5.Columns["ID"].Visible = false;
             dataGridView5.Columns["Price"].DefaultCellStyle.Format = "N2";
@@ -462,7 +733,7 @@ namespace SmartSupply
         {
             dataGridView3.DataSource = DBconnection.Query(
                 "SELECT p.product_id AS [ID], p.product_name AS [Product], c.category_name AS [Category], " +
-                "p.quantity AS [Stock], p.reorder_level AS [Reorder Level], p.unit_price AS [Price] " +
+                "p.quantity AS [Stock], p.reorder_level AS [Reorder Level], p.selling_price AS [Price] " +
                 "FROM products p LEFT JOIN categories c ON c.category_id = p.category_id " +
                 "WHERE p.product_name LIKE @search OR c.category_name LIKE @search ORDER BY p.product_name",
                 new SqlParameter("@search", "%" + textBox2.Text.Trim() + "%"));
@@ -986,6 +1257,16 @@ namespace SmartSupply
         }
 
         private void lblProfitMargin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlQuotation_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
         {
 
         }
