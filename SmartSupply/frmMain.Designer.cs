@@ -106,16 +106,16 @@
             this.label53 = new System.Windows.Forms.Label();
             this.pnlPriceCalculator = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
             this.lblMarginUsed = new System.Windows.Forms.Label();
-            this.lblSuggestedPrice = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.lblSuggestedPrice = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.lblProfitMargin = new System.Windows.Forms.Label();
             this.lblUnitCostMargin = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.btnCalculateMargin = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.smartmarginbutton = new System.Windows.Forms.Button();
@@ -127,15 +127,16 @@
             this.label60 = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
             this.markuppanel = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
             this.lblMarkUpUsed = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.cboMarkUpPercent = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.cboMarkUpPercent = new System.Windows.Forms.ComboBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblProfitMarkUp = new System.Windows.Forms.Label();
             this.btnCalculateMarkUp = new System.Windows.Forms.Button();
+            this.btnApplyMarkUpPrice = new System.Windows.Forms.Button();
             this.lblUnitCostMarkUp = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -146,7 +147,7 @@
             this.nudQuantityMarkUp = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.lblSellingPrice = new System.Windows.Forms.Label();
+            this.lblSellingPrice = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
@@ -1171,16 +1172,16 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.lblMarginUsed);
+            this.panel2.Controls.Add(this.textBox4);
             this.panel2.Controls.Add(this.lblSuggestedPrice);
-            this.panel2.Controls.Add(this.label22);
             this.panel2.Controls.Add(this.label25);
             this.panel2.Controls.Add(this.lblProfitMargin);
             this.panel2.Controls.Add(this.lblUnitCostMargin);
             this.panel2.Controls.Add(this.label28);
             this.panel2.Controls.Add(this.label29);
             this.panel2.Controls.Add(this.label32);
-            this.panel2.Controls.Add(this.btnCalculateMargin);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.smartmarginbutton);
@@ -1193,6 +1194,16 @@
             this.panel2.Size = new System.Drawing.Size(562, 708);
             this.panel2.TabIndex = 51;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(40, 369);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(42, 23);
+            this.label12.TabIndex = 64;
+            this.label12.Text = "1-99";
+            // 
             // lblMarginUsed
             // 
             this.lblMarginUsed.AutoSize = true;
@@ -1200,37 +1211,35 @@
             this.lblMarginUsed.ForeColor = System.Drawing.Color.DimGray;
             this.lblMarginUsed.Location = new System.Drawing.Point(169, 622);
             this.lblMarginUsed.Name = "lblMarginUsed";
-            this.lblMarginUsed.Size = new System.Drawing.Size(40, 25);
+            this.lblMarginUsed.Size = new System.Drawing.Size(0, 25);
             this.lblMarginUsed.TabIndex = 60;
-            this.lblMarginUsed.Text = "----";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox4.Location = new System.Drawing.Point(85, 361);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(417, 34);
+            this.textBox4.TabIndex = 63;
             // 
             // lblSuggestedPrice
             // 
-            this.lblSuggestedPrice.AutoSize = true;
+            this.lblSuggestedPrice.BackColor = System.Drawing.Color.White;
+            this.lblSuggestedPrice.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lblSuggestedPrice.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSuggestedPrice.Location = new System.Drawing.Point(37, 490);
+            this.lblSuggestedPrice.Location = new System.Drawing.Point(45, 511);
             this.lblSuggestedPrice.Name = "lblSuggestedPrice";
-            this.lblSuggestedPrice.Size = new System.Drawing.Size(134, 45);
+            this.lblSuggestedPrice.Size = new System.Drawing.Size(300, 44);
             this.lblSuggestedPrice.TabIndex = 59;
-            this.lblSuggestedPrice.Text = " ₱  0.00\r\n";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.ForeColor = System.Drawing.Color.DimGray;
-            this.label22.Location = new System.Drawing.Point(51, 622);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(120, 25);
-            this.label22.TabIndex = 48;
-            this.label22.Text = "Margin Total";
+            this.lblSuggestedPrice.Text = "₱0.00";
             // 
             // label25
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.DimGray;
-            this.label25.Location = new System.Drawing.Point(221, 570);
+            this.label25.Location = new System.Drawing.Point(218, 593);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(59, 25);
             this.label25.TabIndex = 45;
@@ -1241,18 +1250,19 @@
             this.lblProfitMargin.AutoSize = true;
             this.lblProfitMargin.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfitMargin.ForeColor = System.Drawing.Color.DimGray;
-            this.lblProfitMargin.Location = new System.Drawing.Point(276, 572);
+            this.lblProfitMargin.Location = new System.Drawing.Point(283, 595);
             this.lblProfitMargin.Name = "lblProfitMargin";
             this.lblProfitMargin.Size = new System.Drawing.Size(66, 23);
             this.lblProfitMargin.TabIndex = 44;
             this.lblProfitMargin.Text = " ₱ 0.00";
+            this.lblProfitMargin.Click += new System.EventHandler(this.lblProfitMargin_Click);
             // 
             // lblUnitCostMargin
             // 
             this.lblUnitCostMargin.AutoSize = true;
             this.lblUnitCostMargin.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUnitCostMargin.ForeColor = System.Drawing.Color.DimGray;
-            this.lblUnitCostMargin.Location = new System.Drawing.Point(138, 572);
+            this.lblUnitCostMargin.Location = new System.Drawing.Point(138, 595);
             this.lblUnitCostMargin.Name = "lblUnitCostMargin";
             this.lblUnitCostMargin.Size = new System.Drawing.Size(66, 23);
             this.lblUnitCostMargin.TabIndex = 42;
@@ -1263,7 +1273,7 @@
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.Color.DimGray;
-            this.label28.Location = new System.Drawing.Point(51, 572);
+            this.label28.Location = new System.Drawing.Point(52, 597);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(81, 23);
             this.label28.TabIndex = 41;
@@ -1274,7 +1284,7 @@
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label29.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label29.Location = new System.Drawing.Point(51, 537);
+            this.label29.Location = new System.Drawing.Point(51, 558);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(220, 25);
             this.label29.TabIndex = 40;
@@ -1289,18 +1299,6 @@
             this.label32.Size = new System.Drawing.Size(148, 23);
             this.label32.TabIndex = 37;
             this.label32.Text = "Margin Strategy%";
-            // 
-            // btnCalculateMargin
-            // 
-            this.btnCalculateMargin.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.btnCalculateMargin.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.btnCalculateMargin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalculateMargin.FormattingEnabled = true;
-            this.btnCalculateMargin.Location = new System.Drawing.Point(45, 359);
-            this.btnCalculateMargin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCalculateMargin.Name = "btnCalculateMargin";
-            this.btnCalculateMargin.Size = new System.Drawing.Size(457, 36);
-            this.btnCalculateMargin.TabIndex = 36;
             // 
             // panel4
             // 
@@ -1413,15 +1411,16 @@
             // markuppanel
             // 
             this.markuppanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.markuppanel.Controls.Add(this.label10);
             this.markuppanel.Controls.Add(this.lblMarkUpUsed);
-            this.markuppanel.Controls.Add(this.label6);
-            this.markuppanel.Controls.Add(this.label3);
             this.markuppanel.Controls.Add(this.cboMarkUpPercent);
+            this.markuppanel.Controls.Add(this.label3);
             this.markuppanel.Controls.Add(this.panel7);
             this.markuppanel.Controls.Add(this.label11);
             this.markuppanel.Controls.Add(this.label4);
             this.markuppanel.Controls.Add(this.lblProfitMarkUp);
             this.markuppanel.Controls.Add(this.btnCalculateMarkUp);
+            this.markuppanel.Controls.Add(this.btnApplyMarkUpPrice);
             this.markuppanel.Controls.Add(this.lblUnitCostMarkUp);
             this.markuppanel.Controls.Add(this.label16);
             this.markuppanel.Controls.Add(this.label14);
@@ -1435,6 +1434,16 @@
             this.markuppanel.Size = new System.Drawing.Size(562, 708);
             this.markuppanel.TabIndex = 50;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(39, 369);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(42, 23);
+            this.label10.TabIndex = 62;
+            this.label10.Text = "1-99";
+            // 
             // lblMarkUpUsed
             // 
             this.lblMarkUpUsed.AutoSize = true;
@@ -1442,20 +1451,17 @@
             this.lblMarkUpUsed.ForeColor = System.Drawing.Color.DimGray;
             this.lblMarkUpUsed.Location = new System.Drawing.Point(178, 622);
             this.lblMarkUpUsed.Name = "lblMarkUpUsed";
-            this.lblMarkUpUsed.Size = new System.Drawing.Size(40, 25);
+            this.lblMarkUpUsed.Size = new System.Drawing.Size(0, 25);
             this.lblMarkUpUsed.TabIndex = 59;
-            this.lblMarkUpUsed.Text = "----";
             // 
-            // label6
+            // cboMarkUpPercent
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.DimGray;
-            this.label6.Location = new System.Drawing.Point(51, 622);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(132, 25);
-            this.label6.TabIndex = 58;
-            this.label6.Text = "Mark Up Total";
+            this.cboMarkUpPercent.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboMarkUpPercent.Location = new System.Drawing.Point(84, 361);
+            this.cboMarkUpPercent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboMarkUpPercent.Name = "cboMarkUpPercent";
+            this.cboMarkUpPercent.Size = new System.Drawing.Size(417, 34);
+            this.cboMarkUpPercent.TabIndex = 61;
             // 
             // label3
             // 
@@ -1466,18 +1472,6 @@
             this.label3.Size = new System.Drawing.Size(89, 23);
             this.label3.TabIndex = 37;
             this.label3.Text = "Mark up%";
-            // 
-            // cboMarkUpPercent
-            // 
-            this.cboMarkUpPercent.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboMarkUpPercent.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboMarkUpPercent.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboMarkUpPercent.FormattingEnabled = true;
-            this.cboMarkUpPercent.Location = new System.Drawing.Point(47, 359);
-            this.cboMarkUpPercent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cboMarkUpPercent.Name = "cboMarkUpPercent";
-            this.cboMarkUpPercent.Size = new System.Drawing.Size(455, 36);
-            this.cboMarkUpPercent.TabIndex = 36;
             // 
             // panel7
             // 
@@ -1492,11 +1486,12 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.DimGray;
-            this.label11.Location = new System.Drawing.Point(225, 570);
+            this.label11.Location = new System.Drawing.Point(220, 595);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(59, 25);
             this.label11.TabIndex = 55;
             this.label11.Text = "Profit";
+            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // label4
             // 
@@ -1514,7 +1509,7 @@
             this.lblProfitMarkUp.AutoSize = true;
             this.lblProfitMarkUp.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfitMarkUp.ForeColor = System.Drawing.Color.DimGray;
-            this.lblProfitMarkUp.Location = new System.Drawing.Point(280, 572);
+            this.lblProfitMarkUp.Location = new System.Drawing.Point(283, 595);
             this.lblProfitMarkUp.Name = "lblProfitMarkUp";
             this.lblProfitMarkUp.Size = new System.Drawing.Size(66, 23);
             this.lblProfitMarkUp.TabIndex = 54;
@@ -1532,12 +1527,25 @@
             this.btnCalculateMarkUp.Text = "Calculate";
             this.btnCalculateMarkUp.UseVisualStyleBackColor = false;
             // 
+            // btnApplyMarkUpPrice
+            // 
+            this.btnApplyMarkUpPrice.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnApplyMarkUpPrice.Enabled = false;
+            this.btnApplyMarkUpPrice.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApplyMarkUpPrice.Location = new System.Drawing.Point(45, 460);
+            this.btnApplyMarkUpPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnApplyMarkUpPrice.Name = "btnApplyMarkUpPrice";
+            this.btnApplyMarkUpPrice.Size = new System.Drawing.Size(456, 46);
+            this.btnApplyMarkUpPrice.TabIndex = 5;
+            this.btnApplyMarkUpPrice.Text = "Apply to Product Price";
+            this.btnApplyMarkUpPrice.UseVisualStyleBackColor = false;
+            // 
             // lblUnitCostMarkUp
             // 
             this.lblUnitCostMarkUp.AutoSize = true;
             this.lblUnitCostMarkUp.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUnitCostMarkUp.ForeColor = System.Drawing.Color.DimGray;
-            this.lblUnitCostMarkUp.Location = new System.Drawing.Point(142, 572);
+            this.lblUnitCostMarkUp.Location = new System.Drawing.Point(138, 597);
             this.lblUnitCostMarkUp.Name = "lblUnitCostMarkUp";
             this.lblUnitCostMarkUp.Size = new System.Drawing.Size(66, 23);
             this.lblUnitCostMarkUp.TabIndex = 53;
@@ -1559,7 +1567,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.DimGray;
-            this.label14.Location = new System.Drawing.Point(51, 572);
+            this.label14.Location = new System.Drawing.Point(51, 597);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(81, 23);
             this.label14.TabIndex = 52;
@@ -1582,7 +1590,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label15.Location = new System.Drawing.Point(51, 537);
+            this.label15.Location = new System.Drawing.Point(51, 558);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(188, 25);
             this.label15.TabIndex = 51;
@@ -1644,13 +1652,14 @@
             // 
             // lblSellingPrice
             // 
-            this.lblSellingPrice.AutoSize = true;
+            this.lblSellingPrice.BackColor = System.Drawing.Color.White;
+            this.lblSellingPrice.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lblSellingPrice.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSellingPrice.Location = new System.Drawing.Point(37, 490);
+            this.lblSellingPrice.Location = new System.Drawing.Point(47, 511);
             this.lblSellingPrice.Name = "lblSellingPrice";
-            this.lblSellingPrice.Size = new System.Drawing.Size(134, 45);
+            this.lblSellingPrice.Size = new System.Drawing.Size(300, 44);
             this.lblSellingPrice.TabIndex = 49;
-            this.lblSellingPrice.Text = " ₱  0.00\r\n";
+            this.lblSellingPrice.Text = "₱0.00";
             // 
             // label7
             // 
@@ -1697,6 +1706,7 @@
             this.pnlQuotation.Name = "pnlQuotation";
             this.pnlQuotation.Size = new System.Drawing.Size(1139, 804);
             this.pnlQuotation.TabIndex = 66;
+            this.pnlQuotation.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlQuotation_Paint);
             // 
             // btnDelete
             // 
@@ -1795,12 +1805,12 @@
             this.ClientSize = new System.Drawing.Size(1409, 804);
             this.Controls.Add(this.pnlNavigator);
             this.Controls.Add(this.pnlDashboard);
-            this.Controls.Add(this.pnlPOSTerminal);
             this.Controls.Add(this.pnlProducts);
             this.Controls.Add(this.pnlCategories);
             this.Controls.Add(this.pnlQuotation);
             this.Controls.Add(this.pnlInventoryMovements);
             this.Controls.Add(this.pnlPriceCalculator);
+            this.Controls.Add(this.pnlPOSTerminal);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmMain";
@@ -1961,15 +1971,13 @@
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblMarginUsed;
-        private System.Windows.Forms.Label lblSuggestedPrice;
-        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox lblSuggestedPrice;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label lblProfitMargin;
         private System.Windows.Forms.Label lblUnitCostMargin;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.ComboBox btnCalculateMargin;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button smartmarginbutton;
@@ -1982,14 +1990,13 @@
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.Panel markuppanel;
         private System.Windows.Forms.Label lblMarkUpUsed;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cboMarkUpPercent;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblProfitMarkUp;
         private System.Windows.Forms.Button btnCalculateMarkUp;
+        private System.Windows.Forms.Button btnApplyMarkUpPrice;
         private System.Windows.Forms.Label lblUnitCostMarkUp;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label14;
@@ -2000,9 +2007,13 @@
         private System.Windows.Forms.NumericUpDown nudQuantityMarkUp;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label lblSellingPrice;
+        private System.Windows.Forms.TextBox lblSellingPrice;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.MaskedTextBox maskedTextBox2;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox cboMarkUpPercent;
     }
 }
 
