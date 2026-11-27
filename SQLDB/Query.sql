@@ -29,19 +29,7 @@ CREATE TABLE products (
     category_id      INT,
     quantity         INT DEFAULT 0,
     unit_price       DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-    selling_price    DECIMAL(10,2) NOT NULL DEFAULT 0.00,
     reorder_level    INT NOT NULL DEFAULT 10,
-
-    FOREIGN KEY (category_id)
-        REFERENCES categories(category_id),
-=======
-    product_id     INT IDENTITY(1,1) PRIMARY KEY,
-    product_name   VARCHAR(100) NOT NULL,
-    category_id    INT NULL,
-    quantity       INT NOT NULL DEFAULT 0 CHECK (quantity >= 0),
-    unit_price     DECIMAL(10,2) NOT NULL DEFAULT 0.00 CHECK (unit_price >= 0),
-    reorder_level  INT NOT NULL DEFAULT 10 CHECK (reorder_level >= 0),
->>>>>>> 6ae69f2f972ec32cf56629a53bf5a4e0ed6f4dfc
 
     CONSTRAINT FK_products_categories
         FOREIGN KEY (category_id) REFERENCES categories(category_id)
