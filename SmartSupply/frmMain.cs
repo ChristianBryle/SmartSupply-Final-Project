@@ -573,7 +573,7 @@ namespace SmartSupply
         private static DataTable GetProductsTable()
         {
             return DBconnection.Query(
-                "SELECT product_id, product_name, quantity, selling_price FROM products ORDER BY product_name");
+                "SELECT product_id, product_name, quantity, unit_price FROM products ORDER BY product_name");
         }
 
         private static bool TryGetPercent(TextBox textBox, out decimal percent)
@@ -593,7 +593,7 @@ namespace SmartSupply
             try
             {
                 int affectedRows = DBconnection.Execute(
-                    "UPDATE products SET selling_price = @price WHERE product_id = @id",
+                    "UPDATE products SET unit_price = @price WHERE product_id = @id",
                     new SqlParameter("@price", sellingPrice),
                     new SqlParameter("@id", productId));
                 if (affectedRows != 1)
@@ -724,7 +724,7 @@ namespace SmartSupply
         private void LoadPosProducts()
         {
             dataGridView5.DataSource = DBconnection.Query(
-                "SELECT product_id AS [ID], product_name AS [Product], quantity AS [Stock], selling_price AS [Price] " +
+                "SELECT product_id AS [ID], product_name AS [Product], quantity AS [Stock], unit_price AS [Price] " +
                 "FROM products WHERE quantity > 0 ORDER BY product_name");
             dataGridView5.Columns["ID"].Visible = false;
             dataGridView5.Columns["Price"].DefaultCellStyle.Format = "N2";
@@ -734,7 +734,7 @@ namespace SmartSupply
         {
             dataGridView3.DataSource = DBconnection.Query(
                 "SELECT p.product_id AS [ID], p.product_name AS [Product], c.category_name AS [Category], " +
-                "p.quantity AS [Stock], p.reorder_level AS [Reorder Level], p.selling_price AS [Price] " +
+                "p.quantity AS [Stock], p.reorder_level AS [Reorder Level], p.unit_price AS [Price] " +
                 "FROM products p LEFT JOIN categories c ON c.category_id = p.category_id " +
                 "WHERE p.product_name LIKE @search OR c.category_name LIKE @search ORDER BY p.product_name",
                 new SqlParameter("@search", "%" + textBox2.Text.Trim() + "%"));
